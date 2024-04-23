@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Automatic_Scheduling_App.props" />
+</Project>

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "OnzU0A8To1oTM140mCLsGSq8mbPNVUOWeRNw4hYCHsNKTIOETdZfCxWRJzIiHicW2FSak/qudQFE2b3AnGYDig==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\Automatic_Scheduling_App.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\mysqlconnector\\2.3.6\\mysqlconnector.2.3.6.nupkg.sha512"
+  ],
+  "logs": []
+}
