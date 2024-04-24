@@ -1,0 +1,100 @@
+﻿@page
+@model Automatic_Scheduling_App.Pages.employeeViewModel
+@{
+}
+<br>
+<br>
+<div class="jumbotron">
+    <center>
+        <div class="form-row">
+            <div class="image-container">
+                <img src="/userinfo.svg" class="img-fluid" alt="..." style="width: 150px; height: auto; margin-right:60px;">
+                
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="dept_name" maxlength="16" placeholder="Employee Department" style="color:white; background-color:darksalmon">
+                <input type="text" class="form-control" name="position" maxlength="32" placeholder="Employee Role">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" maxlength="64" style="color:white; background-color:darksalmon">
+            </div>
+        </div>
+    </center>
+    <br />
+    <br />
+    <form method="post">
+        <h6 style="color:darksalmon">Personal Info.</h6>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="first_name" maxlength="16">
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="last_name" maxlength="16">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">SSN</label>
+                <input type="text" class="form-control" name="ssn" maxlength="11">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Date Of Birth</label>
+                <input type="date" class="form-control" name="date_of_birth" maxlength="10">
+            </div>
+        </div>
+        <br />
+        <h6 style="color:darksalmon">Contact Info.</h6>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" name="phone_number" maxlength="13">
+            </div>
+            <div class="col-md-2">
+                <label for="inputCity" class="form-label">Type</label>
+                <input type="text" class="form-control" name="type" maxlength="16">
+            </div>
+            <div class="col-md-2">
+                <label for="inputCity" class="form-label" style="color:darksalmon"><b>Gender</b></label>
+                <input type="text" class="form-control" name="gender" maxlength="1">
+            </div>
+        </div>
+        <br />
+        <h6 style="color:darksalmon">Address Info.</h6>
+        <div class="form-row">
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Street</label>
+                <input type="text" class="form-control" name="street" placeholder="1234 Main St" maxlength="20">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress2" class="form-label">Unit / Apt. </label>
+                <input type="text" class="form-control" name="unit" placeholder="Apartment, studio, or floor" maxlength="10">
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" name="city" maxlength="20">
+            </div>
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">State</label>
+                <select name="state" class="form-select" style=" font-size: 15px; width: 200px; height: 40px;">
+                    <option selected value="XX">Choose...</option>
+                    @foreach (var state in Model.stateInput)
+                    {
+                        <option value="@state.Value">@state.Key</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="inputZip" class="form-label">Zip</label>
+                <input type="text" class="form-control" name="zipcode">
+            </div>
+        </div>
+        <br />
+        <center>
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">Update Profile</button>
+            </div>
+        </center>
+    </form>
+
+</div>

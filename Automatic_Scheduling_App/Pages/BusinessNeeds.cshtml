@@ -1,0 +1,152 @@
+﻿@page
+@model Automatic_Scheduling_App.Pages.BusinessNeedsModel
+@{
+    ViewData["Title"] = "Business Needs!";
+}
+<style>
+    /* Style the line */
+    .horizontal-line {
+        width: 100%; /* Make the line span the entire width of the screen */
+        height: 10px; /* Set the height of the line */
+        background-color: black; /* Set the color of the line */
+        margin-top: 20px; /* Add some space above the line */
+        margin-bottom: 20px; /* Add some space below the line */
+    }
+</style>
+<br>
+<br>
+<div class="container">
+    <h2>Assignments Needed Editor</h2>
+    <center>
+        <div id="assignmentContainer"></div>
+        <button id="addAssignmentBtn">Add a Needed Time</button>
+        <br><br>
+        <button id="grabAssignmentFromDB">Grab Current Needed Times</button>
+        <br><br>
+        <button id="submitAssignmentChanges">Submit Changes to Business Times Needed</button>
+    </center>
+
+    <div class="horizontal-line"></div>
+
+    <br>
+
+    <h2>Needed Times Editor:</h2>
+    <center>
+        <div id="scheduleContainer">
+            <!-- New schedule sets will be added here -->
+        </div>
+        <button id="addScheduleBtn">Add a Needed Time</button>
+        <br><br>
+        <button id="grabScheduleFromDB">Grab Current Needed Times</button>
+        <br><br>
+        <button id="submitScheduleChanges">Submit Changes to Business Times Needed</button>
+    </center>
+</div>
+@{
+    var departmentOptions = "";
+    foreach (var department in Model.AllDepts.DeptName)
+    {
+        departmentOptions += $"<option value='{department}'>{department}</option>";
+    }
+}
+
+<script>
+    function createAssignmentSet() {
+        var assignmentSet = document.createElement('div');
+        assignmentSet.classList.add('assignment-set');
+        assignmentSet.innerHTML = `
+        <center>
+        <label for="shiftPattern">Shift Pattern:</label>
+        <input type=text" placeholder="Shift Pattern">
+        <label for="shiftAmt">Shift Amt:</label>
+        <input type="number" placeholder="Shift Amt">
+        <button class="delete-btn" onclick="deleteAssignment(this)">X</button>
+        <br><br>
+        </center>
+        `;
+        document.getElementById('assignmentContainer').appendChild(assignmentSet);
+    }
+
+    // Function to create a new set of text boxes
+    function createScheduleSet() {
+        // Create elements
+        var scheduleSet = document.createElement('div');
+        scheduleSet.classList.add('schedule-set');
+        scheduleSet.innerHTML = `
+                    <center>
+                    <label for="weekId">Week ID:</label>
+                    <input type="text" placeholder="Week ID">
+                    <label for="department">Department:</label>
+                    <select id = "department">@Html.Raw(departmentOptions)</select>
+                    <label for="dayOfWeek">Day of the Week:</label>
+                    <select id = "dayOfWeek">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                    <br>
+                    <label for "startHour">Start Time</label>
+                    <select id="startHour">
+                        ${generateHoursOptions()}
+                    </select>
+                    <select id="startMinute">
+                        ${generate30MinuteOptions()}
+                    </select>
+                    <label for "endHour">End Time</label>
+                    <select id="endHour">
+                        ${generateHoursOptions()}
+                    </select>
+                    <select id="endMinute">
+                        ${generate30MinuteOptions()}
+                    </select>
+                    <input type="number" placeholder="Freqency Ratio">
+                    <button class="delete-btn" onclick="deleteSchedule(this)">X</button>
+                    <br><br>
+                    </center>
+                `;
+        // Append to container
+        document.getElementById('scheduleContainer').appendChild(scheduleSet);
+    }
+
+    // Function to generate options for hours (24-hour format)
+    function generateHoursOptions() {
+        var options = '';
+        for (var hour = 0; hour < 24; hour++) {
+            options += `<option value="${hour}">${hour}</option>`;
+        }
+        return options;
+    }
+
+    // Function to generate options for minutes (30-minute intervals)
+    function generate30MinuteOptions() {
+        var options = '';
+        for (var minute = 0; minute < 60; minute += 30) {
+            options += `<option value="${minute}">${('0' + minute).slice(-2)}</option>`;
+        }
+        return options;
+    }
+
+    // Function to delete schedule set
+    function deleteSchedule(element) {
+        var scheduleSet = element.parentNode;
+        scheduleSet.parentNode.removeChild(scheduleSet);
+    }
+    function deleteAssignment(element) {
+        var assignmentSet = element.parentNode;
+        assignmentSet.parentNode.removeChild(assignmentSet);
+    }
+
+    // Add event listener to the button for creating schedules
+    document.getElementById('addScheduleBtn').addEventListener('click', function () {
+        createScheduleSet();
+    });
+
+    // Add event listener to the button for adding assignment blocks
+    document.getElementById('addAssignmentBtn').addEventListener('click', function () {
+        createAssignmentSet();
+    });
+</script>
