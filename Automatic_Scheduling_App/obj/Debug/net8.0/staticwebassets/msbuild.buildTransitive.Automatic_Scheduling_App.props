@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Automatic_Scheduling_App.props" />
-</Project>
