@@ -19,13 +19,21 @@ namespace Automatic_Scheduling_App.Pages
 
         //temporary variable while debuging assignment creation
         public string message { get; set; }
-
+        public string manager { get; set; }
         public bool progress { get; set; }
         private MySqlConnection database { get; set; }
 
         public generateScheduleModel(ILogger<generateScheduleModel> logger)
         {
             _logger = logger;
+            try
+            {
+                manager = HttpContext.Session.GetString("manager");
+            }
+            catch (Exception ex)
+            {
+                manager = "none";
+            }
         }
         public void OnGet()
         {

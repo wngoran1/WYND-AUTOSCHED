@@ -20,6 +20,7 @@ namespace Automatic_Scheduling_App.Pages
         public dashboardModel(ILogger<dashboardModel> logger)
         {
             _logger = logger;
+            
         }
 
         //User Data variables
@@ -135,14 +136,18 @@ namespace Automatic_Scheduling_App.Pages
                 nextweek_days[days] = nextweek.AddDays(days).Day;
             }
 
-            // download time data for the employee
-            string[] weekdays = { "mon", "tue", "wed", "thu", "fri", "sat", "sun" };
-
-            foreach (string weekday in weekdays)
+            if (!(user_id < 1))
             {
-                Download_employee_schedule_for(true, currweek_id, user_id, weekday);
-                Download_employee_schedule_for(false, nextweek_id, user_id, weekday);
+                // download time data for the employee
+                string[] weekdays = { "mon", "tue", "wed", "thu", "fri", "sat", "sun" };
+
+                foreach (string weekday in weekdays)
+                {
+                    Download_employee_schedule_for(true, currweek_id, user_id, weekday);
+                    Download_employee_schedule_for(false, nextweek_id, user_id, weekday);
+                }
             }
+           
         }
 
         private void Download_employee_schedule_for(bool currweek, int week_id, int user_id, string day)
