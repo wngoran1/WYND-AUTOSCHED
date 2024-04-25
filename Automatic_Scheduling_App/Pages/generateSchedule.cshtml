@@ -1,0 +1,36 @@
+﻿@page
+@model Automatic_Scheduling_App.Pages.generateScheduleModel
+@{
+    ViewData["Title"] = "Scheduler";
+}
+<br>
+<br>
+<div class="jumbotron" style="text-align:center">
+    <div class="image-container">
+        <center>
+            <img src="/sched.svg" class="img-fluid" alt="..." style="width: 70px; height: auto;">
+        </center>
+    </div>
+    <h1><b>AUTOSCHED (<i>BETA</i>)</b></h1>
+    <h3>Schedule Generator</h3>
+
+</div>
+
+<center>
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">NOTICE !</h4>
+        <p>This page will generates the schedules for the current week and upcoming week starting monday</p>
+        <p>It relies on the data stored in the business needs database for each department</p>
+        <hr />
+        <p class="mb-0"><b>@Model.message</b></p>
+    </div>
+</center>
+
+
+<div id="schgenerate" class="jumbotron">
+    <center>
+        <form method="post">     
+            <button id="addAssignmentBtn" class="btn btn-primary">Make Schedules</button>
+        </form>
+    </center>
+</div>

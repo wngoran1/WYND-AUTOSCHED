@@ -1,0 +1,184 @@
+﻿@page
+@model Automatic_Scheduling_App.Pages.dashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center">
+    <br>
+    <br>
+    <div class="jumbotron">
+        <div class="image-container">
+            <img src="/logows.png" class="img-fluid" alt="...">
+        </div>
+
+        <div id="welcome">
+            <h2>Welcome, <b>@Html.Raw(Model.userName)</b></h2>
+        </div>
+        <center>
+            <div class="card mb-3 " style="max-width: 540px;">
+                <div class="row g-0">
+                    <div id="personid" class="col-md-4">
+                        <img src="/userid.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div id="carbody" class="card-body">
+                            <h5 style="color:coral;" class="card-title">@Model.user_dept</h5>
+                            <h6 class="card-text"><i>@Model.user_role</i></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </center>
+
+        <br>
+
+        <!-- FIRST WEEK STARTS HERE -->
+        <div class="container-fluid">
+            <header>
+                <h4 id="currMonth" class="display-4 mb-4 text-center">Current Month</h4>
+                <script>
+                    // Get the current date
+                    var currentDate = new Date();
+
+                    // Get the current month
+                    var currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+
+                    // Get the current year
+                    var currentYear = currentDate.getFullYear();
+
+                    // Display the current month and year in the HTML element
+                    document.getElementById("currMonth").textContent = currentMonth + ' ' + currentYear;
+                </script>
+
+                <div class="row d-none d-sm-flex p-1 bg-dark text-white">
+                    <h5 class="col-sm p-1 text-center">Monday</h5>
+                    <h5 class="col-sm p-1 text-center">Tuesday</h5>
+                    <h5 class="col-sm p-1 text-center">Wednesday</h5>
+                    <h5 class="col-sm p-1 text-center">Thursday</h5>
+                    <h5 class="col-sm p-1 text-center">Friday</h5>
+                    <h5 class="col-sm p-1 text-center">Saturday</h5>
+                    <h5 class="col-sm p-1 text-center">Sunday</h5>
+                </div>
+            </header>
+            <div class="row border border-right-0 border-bottom-0">
+                <div style="background-color:@Model.monbg;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.currweek_days[0]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.currweek_stime[0]</h4>
+                    <h4 class="endTime">@Model.currweek_etime[0]</h4>
+                </div>
+                <div style="background-color:@Model.tuebg;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.currweek_days[1]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.currweek_stime[1]</h4>
+                    <h4 class="endTime">@Model.currweek_etime[1]</h4>
+                </div>
+                <div style="background-color:@Model.wedbg;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.currweek_days[2]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.currweek_stime[2]</h4>
+                    <h4 class="endTime">@Model.currweek_etime[2]</h4>
+                </div>
+                <div style="background-color:@Model.thubg;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.currweek_days[3]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.currweek_stime[3]</h4>
+                    <h4 class="endTime">@Model.currweek_etime[3]</h4>
+                </div>
+                <div style="background-color:@Model.fribg;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.currweek_days[4]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.currweek_stime[4]</h4>
+                    <h4 class="endTime">@Model.currweek_etime[4]</h4>
+                </div>
+                <div style="background-color:@Model.satbg;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.currweek_days[5]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.currweek_stime[5]</h4>
+                    <h4 class="endTime">@Model.currweek_etime[5]</h4>
+                </div>
+                <div style="background-color:@Model.sunbg;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.currweek_days[6]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.currweek_stime[6]</h4>
+                    <h4 class="endTime">@Model.currweek_etime[6]</h4>
+                </div>
+
+                <div class="w-100"></div> <!-- SECOND WEEK STARTS HERE-->
+
+                <div style="background-color:antiquewhite;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.nextweek_days[0]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.nextweek_stime[0]</h4>
+                    <h4 class="endTime">@Model.nextweek_etime[0]</h4>
+                </div>
+                <div style="background-color:antiquewhite;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.nextweek_days[1]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.nextweek_stime[1]</h4>
+                    <h4 class="endTime">@Model.nextweek_etime[1]</h4>
+                </div>
+                <div style="background-color:antiquewhite;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.nextweek_days[2]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.nextweek_stime[2]</h4>
+                    <h4 class="endTime">@Model.nextweek_etime[2]</h4>
+                </div>
+                <div style="background-color:antiquewhite;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.nextweek_days[3]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.nextweek_stime[3]</h4>
+                    <h4 class="endTime">@Model.nextweek_etime[3]</h4>
+                </div>
+                <div style="background-color:antiquewhite;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.nextweek_days[4]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.nextweek_stime[4]</h4>
+                    <h4 class="endTime">@Model.nextweek_etime[4]</h4>
+                </div>
+                <div style="background-color:antiquewhite;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.nextweek_days[5]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.nextweek_stime[5]</h4>
+                    <h4 class="endTime">@Model.nextweek_etime[5]</h4>
+                </div>
+                <div style="background-color:antiquewhite;" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">@Model.nextweek_days[6]</span>
+                    </h5>
+                    <h4 class="startTime">@Model.nextweek_stime[6]</h4>
+                    <h4 class="endTime">@Model.nextweek_etime[6]</h4>
+                </div>
+            </div>
+        </div>
+        <br />
+        <center>
+            <div class="col-md-8 mb-3">
+                <form method="post">
+                    <div class="input-group">
+                        <span class="input-group-text">(TEST) Try another user ID</span>
+                        <input type="number" name="userId" aria-label="User ID" class="form-control">
+                        <button type="submit" class="btn btn-warning">Refresh</button>
+                    </div>
+                </form>
+            </div>
+        </center>
+        
+        
+
+    </div>
+</div>
