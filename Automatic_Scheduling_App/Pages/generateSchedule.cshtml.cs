@@ -22,10 +22,14 @@ namespace Automatic_Scheduling_App.Pages
 
         public bool progress { get; set; }
         private MySqlConnection database { get; set; }
+        public string signin { get; set; }
+        public string manager { get; set; }
 
         public generateScheduleModel(ILogger<generateScheduleModel> logger)
         {
             _logger = logger;
+            signin = "LogOut";
+            manager = "block";
         }
         public void OnGet()
         {

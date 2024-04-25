@@ -16,10 +16,16 @@ namespace Automatic_Scheduling_App.Pages
 
         private string db_config = "server=wnprojectdb.chyi8sy82mh3.us-east-2.rds.amazonaws.com;port=3306;database=schedule_app;uid=admin;password=adminroot;";
         private MySqlConnection database { get; set; }
+        public string manager { get; set; }
+
+        public string signin { get; set; }
 
         public dashboardModel(ILogger<dashboardModel> logger)
         {
             _logger = logger;
+            database = new MySqlConnection(db_config);
+            signin = "LogOut";
+            manager = "block";
         }
 
         //User Data variables
@@ -99,8 +105,13 @@ namespace Automatic_Scheduling_App.Pages
                 MySqlCommand select = new MySqlCommand(query, database);
                 select.Parameters.AddWithValue("@weekStart", start_date);
 
-                week_id = (int)select.ExecuteScalar();
+                MySqlDataReader reader = select.ExecuteReader();
 
+                // Iterate through the result set
+                if (reader.Read())
+                {
+                    week_id = Convert.ToInt32(reader["week_id"]);
+                }
             }
             catch (Exception ex)
             {
@@ -140,8 +151,11 @@ namespace Automatic_Scheduling_App.Pages
 
             foreach (string weekday in weekdays)
             {
-                Download_employee_schedule_for(true, currweek_id, user_id, weekday);
-                Download_employee_schedule_for(false, nextweek_id, user_id, weekday);
+                if (currweek_id > 0)
+                    Download_employee_schedule_for(true, currweek_id, user_id, weekday);
+
+                if (nextweek_id > 0)
+                    Download_employee_schedule_for(false, nextweek_id, user_id, weekday);
             }
         }
 
@@ -202,10 +216,10 @@ namespace Automatic_Scheduling_App.Pages
 
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             // initialize startup variables
-            database = new MySqlConnection(db_config);
+            // database = new MySqlConnection(db_config);
             int user_id;
             // initialize current week data
 
@@ -226,8 +240,14 @@ namespace Automatic_Scheduling_App.Pages
                 user_id = 0;
             }
 
+            // try sent user back to index if he tries coming back here without login
+            if (user_id == 0)
+                return RedirectToPage("Index");
+
             SetUserData(user_id);
             SetCalendarDays(user_id);
+
+            return Page();
 
         }
 

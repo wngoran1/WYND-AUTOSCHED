@@ -17,11 +17,15 @@ namespace Automatic_Scheduling_App.Pages
         private MySqlConnection database { get; set; }
         public Dictionary<string, string> stateInput { get; set; }
         private int user_id;
+        public string manager { get; set; }
+        public string signin { get; set; }
 
         public employeeViewModel(ILogger<employeeViewModel> logger)
         {
             _logger = logger;
             user_id = 0;
+            signin = "LogOut";
+            manager = "block";
 
             stateInput = new Dictionary<string, string>
             {

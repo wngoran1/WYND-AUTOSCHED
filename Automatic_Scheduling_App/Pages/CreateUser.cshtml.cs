@@ -12,10 +12,15 @@ namespace Automatic_Scheduling_App.Pages
     public class createUserModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-
+        private string db_config = "server=wnprojectdb.chyi8sy82mh3.us-east-2.rds.amazonaws.com;port=3306;database=schedule_app;uid=admin;password=adminroot;";
+        private MySqlConnection database { get; set; }
+        public string manager { get; set; }
+        public string signin { get; set; }
         public createUserModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
+            signin = "LogOut";
+            manager = "block";
         }
 
         public void OnGet()
