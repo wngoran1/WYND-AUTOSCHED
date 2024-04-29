@@ -9,6 +9,8 @@ using System.Linq;
 using System.Reflection.PortableExecutable;
 using System;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Html;
+using System.Threading.Tasks;
 
 namespace Automatic_Scheduling_App.Pages
 {
@@ -19,11 +21,11 @@ namespace Automatic_Scheduling_App.Pages
 
         //temporary variable while debuging assignment creation
         public string message { get; set; }
-
-        public bool progress { get; set; }
         private MySqlConnection database { get; set; }
         public string signin { get; set; }
         public string manager { get; set; }
+
+        public int complete {  get; set; }
 
         public generateScheduleModel(ILogger<generateScheduleModel> logger)
         {
@@ -31,36 +33,50 @@ namespace Automatic_Scheduling_App.Pages
             signin = "LogOut";
             manager = "block";
         }
+
         public void OnGet()
         {
-            progress = true;
             message = "";
+            complete = 0;
         }
         public void OnPost()
         {
-            progress = true;
+            complete = 0;
+
             // collect week start dates for current and next
             DateTime today = DateTime.Today;
-            int daysUntilMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek) % 7;
-            DateTime monday = today.AddDays(daysUntilMonday);
-            DateTime nextweek = monday.AddDays(7);
 
-            //test stuff for creating some schedules, will elete)
+            int daysSinceMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek) % 7;
+            if (daysSinceMonday > 0) { daysSinceMonday -= 7; }
+
+            DateTime monday = today.AddDays(daysSinceMonday);
+            DateTime nextweek = monday.AddDays(7);
+            DateTime thirdweek = monday.AddDays(14);
+
+            //test stuff for creating some schedules, will delete later)
             DateOnly start_date = new DateOnly(monday.Year, monday.Month, monday.Day);
             string week_name = "Week of " + start_date.ToString();
 
             DateOnly start_date_2 = new DateOnly(nextweek.Year, nextweek.Month, nextweek.Day);
             string week_name_2 = "Week of " + start_date_2.ToString();
 
+            DateOnly start_date_3 = new DateOnly(thirdweek.Year, thirdweek.Month, thirdweek.Day);
+            string week_name_3 = "Week of " + start_date_3.ToString();
+
             AssignmentCreator newAssignment = new AssignmentCreator(db_config);
 
             newAssignment.AutoScheduler(week_name, start_date);
-            newAssignment.AutoScheduler(week_name_2, start_date_2); 
+
+            newAssignment.AutoScheduler(week_name_2, start_date_2);
+
+            newAssignment.AutoScheduler(week_name_3, start_date_3);
 
             message = "###  New schedules have been generated  ###";
 
             DateTime dateTime = DateTime.Now; // Example DateTime object
             DateTime dateOnly = dateTime.Date;
+
+            complete = 100;
         }
 
     }

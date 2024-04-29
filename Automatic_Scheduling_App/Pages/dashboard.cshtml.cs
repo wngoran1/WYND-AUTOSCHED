@@ -43,14 +43,19 @@ namespace Automatic_Scheduling_App.Pages
         public List<string> nextweek_stime { get; set; }
         public List<string> nextweek_etime { get; set; }
 
+        // third week data variables
+        public List<int> thirdweek_days { get; set; }
+        public List<string> thirdweek_stime { get; set; }
+        public List<string> thirdweek_etime { get; set; }
+
         // set distinct color for current day
-        public string monbg = DateTime.Today.DayOfWeek == DayOfWeek.Monday ? "lemonchiffon" : "white";
-        public string tuebg = DateTime.Today.DayOfWeek == DayOfWeek.Tuesday ? "lemonchiffon" : "white";
-        public string wedbg = DateTime.Today.DayOfWeek == DayOfWeek.Wednesday ? "lemonchiffon" : "white";
-        public string thubg = DateTime.Today.DayOfWeek == DayOfWeek.Thursday ? "lemonchiffon" : "white";
-        public string fribg = DateTime.Today.DayOfWeek == DayOfWeek.Friday ? "lemonchiffon" : "white";
-        public string satbg = DateTime.Today.DayOfWeek == DayOfWeek.Saturday ? "lemonchiffon" : "white";
-        public string sunbg = DateTime.Today.DayOfWeek == DayOfWeek.Sunday ? "lemonchiffon" : "white";
+        public string monbg = DateTime.Today.DayOfWeek == DayOfWeek.Monday ? "lightcyan" : "white";
+        public string tuebg = DateTime.Today.DayOfWeek == DayOfWeek.Tuesday ? "lightcyan" : "white";
+        public string wedbg = DateTime.Today.DayOfWeek == DayOfWeek.Wednesday ? "lightcyan" : "white";
+        public string thubg = DateTime.Today.DayOfWeek == DayOfWeek.Thursday ? "lightcyan" : "white";
+        public string fribg = DateTime.Today.DayOfWeek == DayOfWeek.Friday ? "lightcyan" : "white";
+        public string satbg = DateTime.Today.DayOfWeek == DayOfWeek.Saturday ? "lightcyan" : "white";
+        public string sunbg = DateTime.Today.DayOfWeek == DayOfWeek.Sunday ? "lightcyan" : "white";
 
         private void SetUserData(int user_id)
         {
@@ -130,20 +135,25 @@ namespace Automatic_Scheduling_App.Pages
         {
             // collect week start dates for current and next
             DateTime today = DateTime.Today;
-            int daysUntilMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek) % 7;
-            DateTime monday = today.AddDays(daysUntilMonday); 
 
+            int daysSinceMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek) % 7;
+            if (daysSinceMonday > 0) { daysSinceMonday -= 7; }
+
+            DateTime monday = today.AddDays(daysSinceMonday); 
             DateTime nextweek = monday.AddDays(7);
+            DateTime thirdweek = monday.AddDays(14);
 
             // retrive respective week ids from database
             int currweek_id = Download_week_id(monday.ToString("yyyy-MM-dd"));
             int nextweek_id = Download_week_id(nextweek.ToString("yyyy-MM-dd"));
+            int thirdweek_id = Download_week_id(thirdweek.ToString("yyyy-MM-dd"));
 
             // update the calendar month days
             for (int days = 0; days < 7; days++)
             {
                 currweek_days[days] = monday.AddDays(days).Day;
                 nextweek_days[days] = nextweek.AddDays(days).Day;
+                thirdweek_days[days] = thirdweek.AddDays(days).Day;
             }
 
             // download time data for the employee
@@ -152,14 +162,17 @@ namespace Automatic_Scheduling_App.Pages
             foreach (string weekday in weekdays)
             {
                 if (currweek_id > 0)
-                    Download_employee_schedule_for(true, currweek_id, user_id, weekday);
+                    Download_employee_schedule_for(1, currweek_id, user_id, weekday);
 
                 if (nextweek_id > 0)
-                    Download_employee_schedule_for(false, nextweek_id, user_id, weekday);
+                    Download_employee_schedule_for(2, nextweek_id, user_id, weekday);
+
+                if (thirdweek_id > 0)
+                    Download_employee_schedule_for(3, thirdweek_id, user_id, weekday);
             }
         }
 
-        private void Download_employee_schedule_for(bool currweek, int week_id, int user_id, string day)
+        private void Download_employee_schedule_for(int currweek, int week_id, int user_id, string day)
         {
             int currday = -1;
 
@@ -190,15 +203,20 @@ namespace Automatic_Scheduling_App.Pages
                 // Iterate through the result set
                 while (reader.Read())
                 {  
-                    if (currweek)
+                    if (currweek == 1)
                     {
                         currweek_stime[currday] = reader.GetTimeSpan("start_time").ToString("hh\\:mm");
                         currweek_etime[currday] = reader.GetTimeSpan("end_time").ToString("hh\\:mm");
                     }
-                    else
+                    else if (currweek == 2)
                     {
                         nextweek_stime[currday] = reader.GetTimeSpan("start_time").ToString("hh\\:mm");
                         nextweek_etime[currday] = reader.GetTimeSpan("end_time").ToString("hh\\:mm");
+                    }
+                    else if (currweek == 3)
+                    {
+                        thirdweek_stime[currday] = reader.GetTimeSpan("start_time").ToString("hh\\:mm");
+                        thirdweek_etime[currday] = reader.GetTimeSpan("end_time").ToString("hh\\:mm");
                     }
                 }
 
@@ -231,6 +249,11 @@ namespace Automatic_Scheduling_App.Pages
             nextweek_days = new List<int>(new int[7]);
             nextweek_stime = new List<string> { "DAY", "DAY", "DAY", "DAY", "DAY", "DAY", "DAY" };
             nextweek_etime = new List<string> { "OFF", "OFF", "OFF", "OFF", "OFF", "OFF", "OFF" };
+
+            // initialize next week data
+            thirdweek_days = new List<int>(new int[7]);
+            thirdweek_stime = new List<string> { "DAY", "DAY", "DAY", "DAY", "DAY", "DAY", "DAY" };
+            thirdweek_etime = new List<string> { "OFF", "OFF", "OFF", "OFF", "OFF", "OFF", "OFF" };
 
             try
             {

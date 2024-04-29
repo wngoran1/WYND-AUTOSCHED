@@ -19,6 +19,8 @@ namespace Automatic_Scheduling_App.Pages
         public Dictionary<string, string> userData { get; set; }
 
         private int user_id;
+        private int reset;
+        private bool errorFound;
         public string manager { get; set; }
         public string signin { get; set; }
         public string updated { get; set; }
@@ -33,6 +35,8 @@ namespace Automatic_Scheduling_App.Pages
             signin = "LogOut";
             manager = "block";
 
+            errorFound = false;
+
             userData = new Dictionary<string, string> 
             {
                 {"dept_name", "Unknown Department" },
@@ -44,8 +48,8 @@ namespace Automatic_Scheduling_App.Pages
                 {"ssn", "N/A" },
                 {"dob", "N/A" },
 
-                {"number", "N/A" },
-                {"type", "N/A" },
+                {"phone_number", "N/A" },
+                {"phone_type", "N/A" },
                 {"gender", "O" },
 
                 {"street", "N/A" },
@@ -131,8 +135,8 @@ namespace Automatic_Scheduling_App.Pages
                     DateOnly dob = reader.GetDateOnly("date_of_birth");
                     userData["dob"] = dob.ToString();
 
-                    userData["number"] = reader.GetString("phone_number");
-                    userData["type"] = reader.GetString("phone_type");
+                    userData["phone_number"] = reader.GetString("phone_number");
+                    userData["phone_type"] = reader.GetString("phone_type");
                     userData["gender"] = reader.GetString("gender");
 
                     userData["street"] = reader.GetString("street");
@@ -160,13 +164,17 @@ namespace Automatic_Scheduling_App.Pages
                                 attribute + " = @Value where user_id = @userID";
                 MySqlCommand select = new MySqlCommand(query, database);
                 select.Parameters.AddWithValue("@Value", value);
+                select.Parameters.AddWithValue("@userID", user_id);
 
                 select.ExecuteNonQuery();
 
             }
             catch (Exception ex)
             {
-                updated = "block";
+                updateFail = "block";
+                updated = "none";
+                errorFound = true;
+
                 Console.WriteLine("Error: " + ex.Message);
                 // Handle exceptions
             }
@@ -186,66 +194,115 @@ namespace Automatic_Scheduling_App.Pages
 
                 HttpContext.Session.SetString("updated", "none");
                 HttpContext.Session.SetString("updateFail", "block");
+                HttpContext.Session.SetInt32("eu_reset", 1);
 
                 // no need to access database if user does not exists
                 return;
             }
 
             // begin user data collection
+            errorFound = false;
             string value;
 
             value = Request.Form["first_name"];
             if (userData["first_name"] != value)
-                Console.WriteLine("first name is " + value);
-                //UpdateUserRecord("first_name", value);
+                UpdateUserRecord("first_name", value);
 
             value = Request.Form["last_name"];
-            if (userData["last_name"] == value)
-                Console.WriteLine("last name is " + value);
-            //UpdateUserRecord("last_name", value);
+            if (userData["last_name"] != value)
+                UpdateUserRecord("last_name", value);
 
-            value = Request.Form["number"];
-            if (userData["number"] != value)
-                //UpdateUserRecord("phone_number", value);
+            value = Request.Form["phone_number"];
+            if (userData["phone_number"] != value)
+                UpdateUserRecord("phone_number", value);
 
-            /*
+            value = Request.Form["phone_type"];
+            if (userData["phone_type"] != value)
+                UpdateUserRecord("phone_type", value);
 
-            DateOnly dob = reader.GetDateOnly("date_of_birth");
-            userData["dob"] = dob.ToString();
+            value = Request.Form["gender"];
+            if (userData["gender"] != value)
+                UpdateUserRecord("gender", value);
 
-            userData["number"] = reader.GetString("phone_number");
-            userData["type"] = reader.GetString("phone_type");
-            userData["gender"] = reader.GetString("gender");
+            value = Request.Form["street"];
+            if (userData["street"] != value)
+                UpdateUserRecord("street", value);
 
-            userData["street"] = reader.GetString("street");
-            userData["city"] = reader.GetString("city");
-            userData["unit"] = reader.GetString("unit");
-            userData["state"] = reader.GetString("state");
-            userData["zipcode"] = reader.GetString("zipcode");
+            value = Request.Form["city"];
+            if (userData["city"] != value)
+                UpdateUserRecord("city", value);
 
-            */
+            value = Request.Form["unit"];
+            if (userData["unit"] != value)
+                UpdateUserRecord("unit", value);
 
-            HttpContext.Session.SetString("updated", "block");
-            HttpContext.Session.SetString("updateFail", "none");
+            value = Request.Form["state"];
+            if (userData["state"] != value)
+                UpdateUserRecord("state", value);
+
+            value = Request.Form["zipcode"];
+            if (userData["zipcode"] != value)
+                UpdateUserRecord("zipcode", value);
+
+            if (errorFound)
+            {
+                HttpContext.Session.SetString("updated", "none");
+                HttpContext.Session.SetString("updateFail", "block");
+            }
+            else
+            {
+                HttpContext.Session.SetString("updated", "block");
+                HttpContext.Session.SetString("updateFail", "none");
+            }
+
+            HttpContext.Session.SetInt32("eu_reset", 1);
         }
 
         public IActionResult OnGet()
         {
+            // set flag reset
             try
             {
-                // get the state of the Data updates flag 
-                updated = HttpContext.Session.GetString("updated");
+                reset = (int)HttpContext.Session.GetInt32("eu_reset");
             }
-            catch
+            catch (Exception ex)
+            {
+                reset = 0;
+            }
+
+            // check flags to display
+            try
+            {
+                if (reset != 0)
+                {
+                    // get the state of the Data updates flag 
+                    updateFail = HttpContext.Session.GetString("updateFail");
+                    updated = HttpContext.Session.GetString("updated");
+                }
+                else
+                {
+                    updated = "none";
+                    updateFail = "none";
+                }
+                
+            }
+            catch (Exception ex)
             {
                 updated = "none";
+                updateFail = "none";
             }
+
             GetUserData();
-            
+
+            // try sent user back to index if he tries coming back here without login
+            if (user_id == 0)
+                return RedirectToPage("Index");
+
             return Page();
         }
         public IActionResult OnPost()
         {
+            GetUserData();
             UpdateUserData();
 
             return RedirectToPage();

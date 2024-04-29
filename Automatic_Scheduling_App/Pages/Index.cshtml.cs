@@ -111,6 +111,8 @@ namespace Automatic_Scheduling_App.Pages
             {
                 HttpContext.Session.SetInt32("user_id", user_id);
                 HttpContext.Session.SetInt32("reset", 0);
+                HttpContext.Session.SetString("error", "none");
+                HttpContext.Session.SetString("manager", "none");
                 return RedirectToPage("dashboard");
             }
 

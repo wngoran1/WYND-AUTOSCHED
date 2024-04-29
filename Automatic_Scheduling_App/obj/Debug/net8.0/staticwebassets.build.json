@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "n0yBPdAos3oVpB1n+HZqoczU7HyRKKi+HaQHwi3WuWc=",
+  "Hash": "Gt87mt+hBmkBwp7U4OeLqZWk01PEHc7gbMvVdZ1GYJc=",
   "Source": "Automatic_Scheduling_App",
   "BasePath": "_content/Automatic_Scheduling_App",
   "Mode": "Default",
@@ -1347,6 +1347,25 @@
       "OriginalItemSpec": "wwwroot\\rect.png"
     },
     {
+      "Identity": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\reload.svg",
+      "SourceId": "Automatic_Scheduling_App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\",
+      "BasePath": "_content/Automatic_Scheduling_App",
+      "RelativePath": "reload.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\reload.svg"
+    },
+    {
       "Identity": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\sched.svg",
       "SourceId": "Automatic_Scheduling_App",
       "SourceType": "Discovered",
@@ -1364,6 +1383,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\sched.svg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\userdisplay.svg",
+      "SourceId": "Automatic_Scheduling_App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\",
+      "BasePath": "_content/Automatic_Scheduling_App",
+      "RelativePath": "userdisplay.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\userdisplay.svg"
     },
     {
       "Identity": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\userid.png",
