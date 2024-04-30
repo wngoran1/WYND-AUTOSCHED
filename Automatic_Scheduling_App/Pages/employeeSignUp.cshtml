@@ -1,4 +1,141 @@
 ﻿@page
 @model Automatic_Scheduling_App.Pages.employeeSignUpModel
 @{
+    ViewData["Title"] = "Sign Up";
 }
+<br>
+<br>
+<div class="jumbotron empupd" style="display: @Model.userpass !important">
+    <center>
+        <h1>Account Registration</h1>
+        <br />
+        <form method="post">
+            <div class="form-row justify-content-center" style="background-color:cadetblue; box-shadow: 2px 2px 5px gray;">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" style="color:cadetblue;margin-top: 20px;" name="code_id" minlength="2" maxlength="32" value="" placeholder="Registration Code" required>
+                    <label for="email" class="form-label" style="color:white">Username</label>
+                    <input type="email" class="form-control" name="email" minlength="3" maxlength="64" value="" placeholder="Employee Email" required>
+             
+                    <label for="paswd" class="form-label" style="color:white">Password</label>
+                    <input type="password" class="form-control" name="pswd" minlength="3" maxlength="12" value="" placeholder="( 3-12 char ) Password" required>
+                    <input type="password" class="form-control" name="pswd_check" minlength="3" maxlength="12" value="" placeholder="Re-enter Password" required>
+                    <div class="form-text" id="basic-addon4" style="color:yellow; font-size: 15px; margin-top: 10px;"><b><i>@Model.message</i></b></div>
+                    <br />
+                </div>
+            </div>
+            <button type="submit" name="register" class="btn btn-warning" style="font-size: 20px; margin-top: 20px;"><b>Register</b></button>
+        </form>
+    </center>
+</div>
+
+<div class="jumbotron empupd" style="display: @Model.useradd !important">
+    <center>
+        <div class="image-container">
+            <img src="/logows.png" class="img-fluid" alt="...">
+        </div>
+        <h1>Welcome to WYND</h1>
+        <h3><i>Complete your registration to activate your account</i></h3>
+        <br />
+        <div class="form-row empupd">
+            <div class="image-container">
+                <img src="/usersign.svg" class="img-fluid" alt="..." style="width: 150px; height: auto; margin-right:60px;">
+
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="dept_name" maxlength="16" value="@Model.userData["dept_name"]" readonly placeholder="Employee Department" style="color:white; background-color:cadetblue; text-align:center;">
+                <input type="text" class="form-control" name="position" maxlength="32" value="@Model.userData["position"]" readonly placeholder="Employee Role" style="color:black; background-color:white; text-align:center;">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" maxlength="64" value="@Model.userData["email"]" readonly style="color:white; background-color:cadetblue; text-align:center;">
+            </div>
+        </div>
+    </center>
+    <br />
+    <br />
+    <form method="post">
+        <h6 style="color:cadetblue">Personal Info.</h6>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="first_name" minlength="1" maxlength="16" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="last_name" minlength="1" maxlength="16" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">SSN</label>
+                <input type="text" class="form-control" name="ssn" maxlength="11" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Date Of Birth</label>
+                <input type="date" class="form-control" name="date_of_birth" maxlength="10" style="font-size: 20px;" required>
+            </div>
+        </div>
+        <br />
+        <h6 style="color:cadetblue">Contact Info.</h6>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" name="phone_number" minlength="10" maxlength="13" required>
+            </div>
+            <div class="col-md-2">
+                <label for="inputCity" class="form-label">Type</label>
+                <br />
+                <select id="type" name="phone_type" class="form-select rounded" style="font-size: 20px; width:fit-content; height: 40px;">
+                    <option value="Home">Home</option>
+                    <option selected value="Mobile">Mobile</option>
+                    <option value="Work">Work</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="gender" class="form-label" style="color:cadetblue"><b>Gender</b></label>
+                <br />
+                <select id="gender" name="gender" class="form-select rounded" style=" font-size: 20px; width:fit-content; height: 40px;">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option selected value="O">Other</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <h6 style="color:cadetblue">Address Info.</h6>
+        <div class="form-row">
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Street</label>
+                <input type="text" class="form-control" name="street" placeholder="1234 Main St" minlength="1" maxlength="20" required>
+            </div>
+            <div class="col-12">
+                <label for="inputAddress2" class="form-label">Unit / Apt. </label>
+                <input type="text" class="form-control" name="unit" value="" placeholder="Apartment, studio, or floor" maxlength="10">
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" name="city" minlength="1" maxlength="20" required>
+            </div>
+            <div class="col-md-3">
+                <label for="state" class="form-label">State</label>
+                <br />
+                <select id="state" name="state" class="form-select rounded" style=" font-size: 20px; width:fit-content; height: 40px;">
+                    <option selected value="XX">Select..</option>
+                    @foreach (var state in Model.stateInput)
+                    {
+                        <option value="@state.Value">@state.Key</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="zipcode" class="form-label">Zip</label>
+                <input type="text" class="form-control" name="zipcode" minlength="4" maxlength="5" required>
+            </div>
+        </div>
+        <br />
+        <center>
+            <div class="col-12">
+                <button type="submit" name="createUser" class="btn btn-info" style="font-size: 20px;">Update Profile</button>
+            </div>
+            <br />
+        </center>
+    </form>
+</div>

@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Automatic_Scheduling_App.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\adduser.svg",
+      "PackagePath": "staticwebassets\\adduser.svg"
+    },
+    {
       "Id": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\backgd.png",
       "PackagePath": "staticwebassets\\backgd.png"
     },
@@ -295,6 +299,10 @@
     {
       "Id": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\userinfo.svg",
       "PackagePath": "staticwebassets\\userinfo.svg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\COURSE\\SPRING 2024\\CMSC 447\\homework\\GROUP ASSIGN\\Automatic_Scheduling_App\\Automatic_Scheduling_App\\wwwroot\\usersign.svg",
+      "PackagePath": "staticwebassets\\usersign.svg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Automatic_Scheduling_App.Microsoft.AspNetCore.StaticWebAssets.props",

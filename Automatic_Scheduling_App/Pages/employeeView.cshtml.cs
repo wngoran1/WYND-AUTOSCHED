@@ -101,25 +101,82 @@ namespace Automatic_Scheduling_App.Pages
                 // Iterate through the result set
                 if (reader.Read())
                 {
-                    userData["dept_name"] = reader.GetString("dept_name");
-                    userData["position"] = reader.GetString("position");
-                    userData["email"] = reader.GetString("email");
+                    if (!reader.IsDBNull(reader.GetOrdinal("dept_name")))
+                    {
+                        userData["dept_name"] = reader.GetString("dept_name");
+                    }
 
-                    userData["first_name"] = reader.GetString("first_name");
-                    userData["last_name"] = reader.GetString("last_name");
-                    userData["ssn"] = reader.GetString("ssn");
-                    DateOnly dob = reader.GetDateOnly("date_of_birth");
-                    userData["dob"] = dob.ToString();
+                    if (!reader.IsDBNull(reader.GetOrdinal("position")))
+                    {
+                        userData["position"] = reader.GetString("position");
+                    }
 
-                    userData["phone_number"] = reader.GetString("phone_number");
-                    userData["phone_type"] = reader.GetString("phone_type");
-                    userData["gender"] = reader.GetString("gender");
+                    if (!reader.IsDBNull(reader.GetOrdinal("email")))
+                    {
+                        userData["email"] = reader.GetString("email");
+                    }
 
-                    userData["street"] = reader.GetString("street");
-                    userData["city"] = reader.GetString("city");
-                    userData["unit"] = reader.GetString("unit");
-                    userData["state"] = reader.GetString("state");
-                    userData["zipcode"] = reader.GetString("zipcode");
+                    if (!reader.IsDBNull(reader.GetOrdinal("first_name")))
+                    {
+                        userData["first_name"] = reader.GetString("first_name");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("last_name")))
+                    {
+                        userData["last_name"] = reader.GetString("last_name");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("ssn")))
+                    {
+                        userData["ssn"] = reader.GetString("ssn");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("date_of_birth")))
+                    {
+                        DateOnly dob = reader.GetDateOnly("date_of_birth");
+                        userData["dob"] = dob.ToString();
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("phone_number")))
+                    {
+                        userData["phone_number"] = reader.GetString("phone_number");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("phone_type")))
+                    {
+                        userData["phone_type"] = reader.GetString("phone_type");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("gender")))
+                    {
+                        userData["gender"] = reader.GetString("gender");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("street")))
+                    {
+                        userData["street"] = reader.GetString("street");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("city")))
+                    {
+                        userData["city"] = reader.GetString("city");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("unit")))
+                    {
+                        userData["unit"] = reader.GetString("unit");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("state")))
+                    {
+                        userData["state"] = reader.GetString("state");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("zipcode")))
+                    {
+                        userData["zipcode"] = reader.GetString("zipcode");
+                    }
+
 
                 }
             }

@@ -3,19 +3,64 @@
 @{
     ViewData["Title"] = "Create User";
 }
-<h1>@ViewData["Title"]</h1>
+<br>
+<br>
+<div class="jumbotron empenrol">
+    <center>
+        <h1>Associate Enrollment</h1>
+        <br />
+        <form method="post">
+            <div class="form-row justify-content-center" style="background-color:azure; box-shadow: 2px 2px 5px gray;">
+                <div class="col-md-6">
+                    <label for="dept_id" class="form-label" style="color:coral; margin-top: 20px; margin-right: 20px;">Employee Department</label>
+                    <select id="dept_id" name="dept_id" class="form-select rounded" style="color:white; font-size: 20px; width:fit-content; height: 40px; margin-bottom: 20px; background-color:mediumseagreen;">
+                        <option selected value="0">Unknown Department</option>
+                        @foreach (var dept in Model.departments)
+                        {
+                            <option value="@dept.Value">@dept.Key</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-row justify-content-center" style="background-color:azure; box-shadow: 2px 2px 5px gray;">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="position" minlength="2" maxlength="32" value="" placeholder="Employee Role" required>
+                    <label for="inputEmail4" class="form-label" style="color:coral">Username</label>
+                    <input type="email" class="form-control" name="email" minlength="3" maxlength="64" value="" placeholder="Employee Email" required>
+                    <div class="form-text" id="basic-addon4" style="color:coral; font-size: 15px;"><b><i>@Model.message</i></b></div>
+                    <br />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <br />
+                <button type="submit" name="newUser" class="btn image-button2">
+                    <img src="/adduser.svg" class="img-fluid" alt="..." style="float:left;">
+                </button>
+            </div>
+        </form>
+    </center>
+</div>
 
-<h2>Add New User</h2>
-<form action="/CreateUser" method="post">
-    <p>@Model.msg</p>
-    <label for="username">User_id:</label>
-    <input type="text" id="user_id" name="user_id" required>
-    <br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-
-    <input type="submit" value="Add User">
-</form>
+<div class="jumbotron empenrol">
+    <center>
+        <h4>Unregistered Accounts</h4>
+        <br />
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">User</th>
+                    <th scope="col">Personal code</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.register)
+                {
+                    <tr>
+                        <td>@user.Key</td>
+                        <td>@user.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </center>
+</div>

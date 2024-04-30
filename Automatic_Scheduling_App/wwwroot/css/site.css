@@ -158,15 +158,31 @@ body {
     font-size: 20px; /* Change the font size for page 2 */
 }
 
+.empenrol {
+    font-size: 20px; /* Change the font size for page 2 */
+}
+    .empenrol input[type="email"] {
+        font-size: 20px; /* Change the font size to your desired value */
+    }
+    .empenrol input[type="text"] {
+        font-size: 20px; /* Change the font size to your desired value */
+    }
+
 .empupd {
     font-size: 20px; /* Change the font size for page 2 */
 }
     .empupd input[type="text"] {
         font-size: 20px; /* Change the font size to your desired value */
     }
+
     .empupd input[type="email"] {
         font-size: 20px; /* Change the font size to your desired value */
     }
+
+    .empupd input[type="password"] {
+        font-size: 20px; /* Change the font size to your desired value */
+    }
+    
 
 .emplogin {
     font-size: 20px; /* Change the font size for page 2 */
@@ -180,4 +196,23 @@ body {
 
 #addressdrop {
     color:coral;
+}
+
+#privacyP {
+    color: black; /* Set text color to blue */
+    font-size: 20px; /* Set font size to 18 pixels */
+    font-family: "Century Schoolbook" font-weight: bold; /* Set font weight to bold */
+    text-align: center; /* Center the text */
+    line-height: 1.5; /* Set line height to 1.5 times the font size */
+    padding: 20px; /* Add padding around the paragraph */
+    background-color:lightcyan; /* Set background color to light gray */
+    border: 2px solid black; /* Add a border */
+    border-radius: 10px; /* Add border radius */
+    box-shadow: 2px 2px 5px gray; /* Add a shadow */
+}
+
+.privacy h1 {
+    color: black;
+    text-align: center; /* Center the text */
+    /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);*/
 }
