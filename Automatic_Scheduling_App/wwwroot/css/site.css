@@ -23,8 +23,8 @@ body {
 
 #layout {
     margin-bottom: 60px;
-    background-color:azure;
-    background-image: url('/backgd.png');
+    background-color: azure;
+    /*background-image: url('/backgd.png');*/
     background-size: cover;
     /* Set background image position */
     background-position: center;
@@ -122,8 +122,16 @@ body {
     height: 50px;
     background-color: transparent;
     border: none; /* Remove default button border */
+}
+
+.image-button2 {
+    width: 80px; /* Adjust width and height as needed */
+    height: 50px;
+    background-color: transparent;
+    border: none; /* Remove default button border */
     margin-right: 20px;
 }
+
 #personid {
     /**/
     margin-top: 20px;
@@ -143,4 +151,33 @@ body {
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+/* Specific font size for page 2 */
+.empview {
+    font-size: 20px; /* Change the font size for page 2 */
+}
+
+.empupd {
+    font-size: 20px; /* Change the font size for page 2 */
+}
+    .empupd input[type="text"] {
+        font-size: 20px; /* Change the font size to your desired value */
+    }
+    .empupd input[type="email"] {
+        font-size: 20px; /* Change the font size to your desired value */
+    }
+
+.emplogin {
+    font-size: 20px; /* Change the font size for page 2 */
+}
+    .emplogin input[type="email"] {
+        font-size: 20px; /* Change the font size for page 2 */
+    }
+    .emplogin input[type="password"] {
+        font-size: 20px; /* Change the font size for page 2 */
+    }
+
+#addressdrop {
+    color:coral;
 }

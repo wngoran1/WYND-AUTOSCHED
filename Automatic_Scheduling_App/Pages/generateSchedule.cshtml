@@ -8,7 +8,7 @@
 <div class="jumbotron" style="text-align:center">
     <div class="image-container">
         <center>
-            <img src="/sched.svg" class="img-fluid" alt="..." style="width: 70px; height: auto;">
+            <img id="scheduleImage" src="/sched.svg" class="img-fluid" alt="..." style="width: 70px; height: auto;">
         </center>
     </div>
     <h1><b>AUTOSCHED (<i>BETA</i>)</b></h1>
@@ -19,18 +19,54 @@
 <center>
     <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">NOTICE !</h4>
-        <p>This page will generates the schedules for the current week and upcoming week starting monday</p>
-        <p>It relies on the data stored in the business needs database for each department</p>
+        <p style="font-size: 20px;">This page will generates the schedules for the current week, and 2 upcoming weeks starting monday</p>
+        <p style="font-size: 20px;">It relies on the data stored in the weekly and daily business needs database for each department</p>
         <hr />
-        <p class="mb-0"><b>@Model.message</b></p>
+        <p id="completionUpdate" class="mb-0"><b>@Model.message</b></p>
+        <div id="progress" class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="@Model.complete" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar text-bg-warning" style="width: @Model.complete%">@Model.complete%</div>
+        </div>
     </div>
 </center>
-
 
 <div id="schgenerate" class="jumbotron">
     <center>
         <form method="post">     
-            <button id="addAssignmentBtn" class="btn btn-primary">Make Schedules</button>
+            <button id="addAssignmentBtn" class="btn btn-primary" action="" style="font-size: 20px;">Make Schedules</button>
         </form>
     </center>
 </div>
+
+<script>
+    document.getElementById("addAssignmentBtn").addEventListener("click", function () {
+        var newValue = 0;
+        // Function to update the progress bar
+        function updateProgressBar() {
+            // Get the progress bar element
+            var progressBar = document.querySelector('.progress-bar');
+
+            // Get the current progress value
+            // var currentValue = parseInt(progressBar.textContent.replace('%', ''));
+
+            // Increment the progress value by 1 (you can adjust this value)
+            newValue++;
+
+            if (newValue < 97) {
+                // Update the width of the progress bar
+                progressBar.style.width = newValue + '%';
+
+                // Update the text inside the progress bar
+                progressBar.textContent = newValue + '%';
+
+                document.getElementById("completionUpdate").innerHTML = "<b>Please Wait! System is Loading. DO NOT CLOSE THIS PAGE</b>";
+            } else {
+                // If the value reaches 100, clear the interval to stop updating
+                clearInterval(progressInterval);
+            }
+        }
+
+        // Update the progress bar every 1 seconds
+        var progressInterval = setInterval(updateProgressBar, 810);
+        updateProgressBar();
+    });
+</script>

@@ -1,14 +1,11 @@
+using Automatic_Scheduling_App.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySqlConnector;
-using System;
 using System.Text;
 using System.Windows;
 using System.Data;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Security.Cryptography.X509Certificates;
 
 
 namespace Automatic_Scheduling_App.Pages
@@ -20,7 +17,6 @@ namespace Automatic_Scheduling_App.Pages
         private MySqlConnection database { get; set; }
         public string manager { get; set; }
         public string signin { get; set; }
-         public string msg {get;set;}
         public createUserModel(ILogger<IndexModel> logger)
         {
             _logger = logger;

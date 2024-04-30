@@ -4,9 +4,9 @@
 }
 <br>
 <br>
-<div class="jumbotron">
+<div class="jumbotron empupd">
     <center>
-        <div class="form-row">
+        <div class="form-row empupd">
             <div class="image-container">
                 <img src="/userinfo.svg" class="img-fluid" alt="..." style="width: 150px; height: auto; margin-right:60px;">
                 
@@ -26,11 +26,11 @@
         <div class="form-row">
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">First Name</label>
-                <input type="text" class="form-control" name="first_name" maxlength="16" value="@Model.userData["first_name"]">
+                <input type="text" class="form-control" name="first_name" minlength="1" maxlength="16" value="@Model.userData["first_name"]">
             </div>
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">Last Name</label>
-                <input type="text" class="form-control" name="last_name" maxlength="16" value="@Model.userData["last_name"]">
+                <input type="text" class="form-control" name="last_name" minlength="1" maxlength="16" value="@Model.userData["last_name"]">
             </div>
         </div>
         <div class="form-row">
@@ -48,16 +48,27 @@
         <div class="form-row">
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" name="phone_number" maxlength="13" value="@Model.userData["number"]">
+                <input type="text" class="form-control" name="phone_number" minlength="10" maxlength="13" value="@Model.userData["phone_number"]">
             </div>
             <div class="col-md-2">
                 <label for="inputCity" class="form-label">Type</label>
-                <input type="text" class="form-control" name="type" maxlength="16" value="@Model.userData["type"]">
+                <br />
+                <select id="type" name="phone_type" class="form-select rounded" style="font-size: 20px; width:fit-content; height: 40px;">
+                    <option selected value = "@Model.userData["phone_type"]">@Model.userData["phone_type"]</option>
+                    <option value ="Home">Home</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Work">Work</option>
+                </select>
             </div>
             <div class="col-md-3">
-                <label for="inputCity" class="form-label" style="color:darksalmon"><b>Gender</b></label>
-                <input type="text" class="form-control" name="gender" style="width:50px;" maxlength="1" value="@Model.userData["gender"]">
-                <small id="genderHelp" class="form-text text-muted">(<b>M</b>)<i>ale</i> |  (<b>F</b>)<i>emale</i>  |  (<b>O</b>)<i>ther</i></small>
+                <label for="gender" class="form-label" style="color:darksalmon"><b>Gender</b></label>
+                <br />
+                <select id="gender" name="gender" class="form-select rounded" style=" font-size: 20px; width:fit-content; height: 40px;">
+                    <option selected>@Model.userData["gender"]</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                </select>
             </div>
         </div>
         <br />
@@ -65,7 +76,7 @@
         <div class="form-row">
             <div class="col-12">
                 <label for="inputAddress" class="form-label">Street</label>
-                <input type="text" class="form-control" name="street" placeholder="1234 Main St" maxlength="20" value="@Model.userData["street"]">
+                <input type="text" class="form-control" name="street" placeholder="1234 Main St" minlength="1" maxlength="20" value="@Model.userData["street"]">
             </div>
             <div class="col-12">
                 <label for="inputAddress2" class="form-label">Unit / Apt. </label>
@@ -73,28 +84,43 @@
             </div>
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" name="city" maxlength="20" value="@Model.userData["city"]">
+                <input type="text" class="form-control" name="city" minlength="1" maxlength="20" value="@Model.userData["city"]">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="state" class="form-label">State</label>
                 <br />
-                <select id="state" name="state" class="form-select rounded" style=" font-size: 15px; width:fit-content; height: 40px;">
-                    <option selected value="XX">@Model.userData["state"]</option>
+                <select id="state" name="state" class="form-select rounded" style=" font-size: 20px; width:fit-content; height: 40px;">
+                    <option selected value="@Model.userData["state"]">@Model.userData["state"]</option>
                     @foreach (var state in Model.stateInput)
                     {
                         <option value="@state.Value">@state.Key</option>
                     }
                 </select>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="zipcode" class="form-label">Zip</label>
-                <input type="text" class="form-control" name="zipcode" maxlength="5" value="@Model.userData["zipcode"]">
+                <input type="text" class="form-control" name="zipcode" minlength="4" maxlength="5" value="@Model.userData["zipcode"]">
             </div>
         </div>
         <br />
         <center>
             <div class="col-12">
-                <button type="submit" class="btn btn-success">Update Profile</button>
+                <button type="submit" class="btn btn-success" style="font-size: 20px;">Update Profile</button>
+            </div>
+            <br />
+            <div style="display: @Model.updateFail !important;" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p><b>Attention:</b> User Record was Not Updated Successfully!</p>
+                <p>Check your input and fill out the form correctly </p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div style="display: @Model.updated !important;" class="alert alert-success alert-dismissible fade show" role="alert">
+                <p><b>Processed:</b> Your User Profile was Updated</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </center>
     </form>

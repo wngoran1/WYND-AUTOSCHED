@@ -4,97 +4,80 @@
 }
 <br>
 <br>
-<div class="jumbotron">
+<div class="jumbotron empview">
     <center>
-        <div class="form-row">
-            <div class="image-container">
-                <img src="/userinfo.svg" class="img-fluid" alt="..." style="width: 150px; height: auto; margin-right:60px;">
-                
-            </div>
-            <div class="col-md-8">
-                <input type="text" class="form-control" name="dept_name" maxlength="16" placeholder="Employee Department" style="color:white; background-color:darksalmon">
-                <input type="text" class="form-control" name="position" maxlength="32" placeholder="Employee Role">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" maxlength="64" readonly style="color:white; background-color:darksalmon">
-            </div>
-        </div>
-    </center>
-    <br />
-    <br />
-    <form method="post">
-        <h6 style="color:darksalmon">Personal Info.</h6>
-        <div class="form-row">
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">First Name</label>
-                <input type="text" class="form-control" name="first_name" maxlength="16">
-            </div>
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">Last Name</label>
-                <input type="text" class="form-control" name="last_name" maxlength="16">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">SSN</label>
-                <input type="text" class="form-control" name="ssn" maxlength="11">
-            </div>
-            <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Date Of Birth</label>
-                <input type="date" class="form-control" name="date_of_birth" maxlength="10">
-            </div>
-        </div>
+        <h1>Associate Portal</h1>
         <br />
-        <h6 style="color:darksalmon">Contact Info.</h6>
-        <div class="form-row">
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" name="phone_number" maxlength="13">
+        <form method="post">
+            <div class="form-row justify-content-center" style="background-color:azure; box-shadow: 2px 2px 5px gray;">
+                <div class="col-md-6">
+                    <label for="dept_name" class="form-label" style="color:coral; margin-top: 20px;">Select a Department to display</label>
+                    <br />
+                    <select id="dept_name" name="dept_name" class="form-select rounded" style=" font-size: 20px; width:fit-content; height: 40px; margin-bottom: 20px; background-color:lightyellow;">
+                        <option selected value="@Model.userData["dept_name"]">@Model.userData["dept_name"]</option>
+                        @foreach (var dept in Model.departments)
+                        {
+                            <option value="@dept">@dept</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <br />
+                    <button type="submit" name="dept_update" class="btn image-button2">
+                        <img src="/reload.svg" class="img-fluid" alt="..." style="float:left;">
+                    </button>
+                </div>
             </div>
-            <div class="col-md-2">
-                <label for="inputCity" class="form-label">Type</label>
-                <input type="text" class="form-control" name="type" maxlength="16">
-            </div>
-            <div class="col-md-2">
-                <label for="inputCity" class="form-label" style="color:darksalmon"><b>Gender</b></label>
-                <input type="text" class="form-control" name="gender" maxlength="1">
-            </div>
-        </div>
-        <br />
-        <h6 style="color:darksalmon">Address Info.</h6>
-        <div class="form-row">
-            <div class="col-12">
-                <label for="inputAddress" class="form-label">Street</label>
-                <input type="text" class="form-control" name="street" placeholder="1234 Main St" maxlength="20">
-            </div>
-            <div class="col-12">
-                <label for="inputAddress2" class="form-label">Unit / Apt. </label>
-                <input type="text" class="form-control" name="unit" placeholder="Apartment, studio, or floor" maxlength="10">
-            </div>
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" name="city" maxlength="20">
-            </div>
-            <div class="col-md-4">
-                <label for="inputState" class="form-label">State</label>
-                <select name="state" class="form-select" style=" font-size: 15px; width: 200px; height: 40px;">
-                    <option selected value="XX">Choose...</option>
-                    @foreach (var state in Model.stateInput)
-                    {
-                        <option value="@state.Value">@state.Key</option>
-                    }
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label for="inputZip" class="form-label">Zip</label>
-                <input type="text" class="form-control" name="zipcode">
-            </div>
-        </div>
-        <br />
-        <center>
-            <div class="col-12">
-                <button type="submit" class="btn btn-success">Update Profile</button>
-            </div>
-        </center>
-    </form>
+        </form>
 
+        <div class="image-container">
+            <img src="/userdisplay.svg" class="img-fluid" alt="..." style="width: 150px; height: auto; margin-bottom:20px; margin-top:20px;">
+        </div>
+        
+        <div class="card" style="width:600px; background-color:lightyellow">
+
+            <div class="card-body">
+                <h5 class="card-title">@Model.userData["first_name"] @Model.userData["last_name"]</h5>
+                <p class="card-text"><b>@Model.userData["email"]</b></p>
+                <p class="card-text"><b>@Model.userData["position"]</b></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" style="background-color:azure;">SSN: <b>@Model.userData["ssn"]</b> D.O.B: <b>@Model.userData["dob"]</b> (<b>@Model.userData["gender"]</b>)</li>
+                <li class="list-group-item" style="background-color:azure;">Contact: <b>@Model.userData["phone_number"]</b>  |  <b>@Model.userData["phone_type"]</b></li>
+            </ul>
+            <div class="card-body text-center">
+                <a class="nav-link dropdown-toggle" href="#" id="addressdrop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <b>Address</b>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg" style="min-width:auto; man-width: 650px; font-size:20px; color:coral; background-color:bisque; box-shadow: 2px 2px 5px gray;">
+                    <ul style="margin-right:40px">street: <b>@Model.userData["street"]</b></ul>
+                    <ul style="margin-right:40px">unit: <b>@Model.userData["unit"]</b></ul>
+                    <ul style="margin-right:40px">city: <b>@Model.userData["city"]</b></ul>
+                    <ul style="margin-right:40px">state: <b>@Model.userData["state"]</b></ul>
+                    <ul style="margin-right:40px">zipcode: <b>@Model.userData["zipcode"]</b></ul>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <br />
+        <form method="post">
+            <div class="form-row justify-content-sm-center">
+                <div class="col-md-2">
+                    <div class="col-12">
+                        <button type="submit" name="prevbut" class="btn btn-success">Prev.</button>
+                    </div>
+                </div>
+                <div class="col-md-2" style="background-color: azure; font-size: 20px; box-shadow: 2px 2px 5px gray;">
+                    <p style="margin-top: 5px;"><b>@(Model.index + 1)</b> of <b>@Model.range</b></p>
+                </div>
+                <div class="col-md-2">
+                    <div class="col-12">
+                        <button type="submit" name="nextbut" class="btn btn-success">Next</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </center>
 </div>
