@@ -5,6 +5,9 @@ using System;
 using System.Text;
 using System.Windows;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Linq;
+using System.Reflection.PortableExecutable;
 
 
 namespace Automatic_Scheduling_App.Pages
@@ -12,16 +15,17 @@ namespace Automatic_Scheduling_App.Pages
     public class NewEmployee: PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-
+        public string msg {get;set;}
         public NewEmployee(ILogger<IndexModel> logger)
         {
             _logger = logger;
+            msg = "";
         }
         public void OnGet()
         {
 
         }
-        private void Add_Employee(object sender, EventArgs e)
+        private string  Add_Employee(object sender, EventArgs e)
         {
             string user_id = Request.Form["user_id"];
             string first_name = Request.Form["first_name"];
@@ -54,6 +58,8 @@ namespace Automatic_Scheduling_App.Pages
             // use print to console instead to see that it works
             // cmd.ExecuteNonQuery(); 
             con.Close();
+            msg = "Employee Sucessfully Added";
+            return msg;
             
             
 

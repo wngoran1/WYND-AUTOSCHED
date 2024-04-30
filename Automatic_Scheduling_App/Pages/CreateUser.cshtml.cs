@@ -5,6 +5,10 @@ using System;
 using System.Text;
 using System.Windows;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Linq;
+using System.Reflection.PortableExecutable;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace Automatic_Scheduling_App.Pages
@@ -16,21 +20,24 @@ namespace Automatic_Scheduling_App.Pages
         private MySqlConnection database { get; set; }
         public string manager { get; set; }
         public string signin { get; set; }
+         public string msg {get;set;}
         public createUserModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
             signin = "LogOut";
             manager = "block";
+            msg = "";
+           
         }
 
         public void OnGet()
         {
-
+            
         }
-        private void CreateUser(object sender, EventArgs e)
+        private string CreateUser(object sender, EventArgs e)
         {
             string user_id = Request.Form["user_id"];
-           
+            string password = Request.Form["password"];
             string email = Request.Form["email"];
 
              MySqlConnection con = new MySqlConnection("server=wnprojectdb.chyi8sy82mh3.us-east-2.rds.amazonaws.com;user=admin;password=adminroot;database=schooldb;port=3306");
@@ -44,24 +51,27 @@ namespace Automatic_Scheduling_App.Pages
                 if(dr.Read())//if there is an existing data with the same username
                 {
                     dr.Close();
-                    Console.WriteLine("Account already exists.\n");
+                   string msg = "Account Already Exists";
+                   return msg;
                   
                 }
                 else
                 {
                     MySqlCommand CMD= new MySqlCommand("INSERT INTO staff(user_id,email) VALUES(@user_id,@email)",con);
                     CMD.Parameters.AddWithValue("@user_id",user_id);
-
-                    
+                    CMD.Parameters.AddWithValue("!password",password);
                     CMD.Parameters.AddWithValue("@email",email);
                     con.Open();
                     CMD.ExecuteNonQuery();
                     con.Close();
+                     msg = "Account Successfully created";
+                    return msg;
                 }
             }
             else
             {
-
+                msg = "Please Fill in data";
+                return msg;
             }
     }
     }

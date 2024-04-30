@@ -5,6 +5,9 @@ using System;
 using System.Text;
 using System.Windows;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Linq;
+using System.Reflection.PortableExecutable;
 
 
 namespace Automatic_Scheduling_App.Pages
@@ -12,17 +15,22 @@ namespace Automatic_Scheduling_App.Pages
     public class LoginModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-
+        public string manager { get; set; }
+        public string signin { get; set; }
+        public string msg {get;set;}
         public LoginModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
+            signin = "LogOut";
+            manager = "block";
+            msg = "";
         }
 
         public void OnGet()
         {
 
         }
-         private void Login_Button(object sender, EventArgs e)
+         private string Login_Button(object sender, EventArgs e)
         {
             string user_id = Request.Form["user_id"];
             
@@ -35,11 +43,16 @@ namespace Automatic_Scheduling_App.Pages
             da.Fill(ds,"staff");
             if(ds.Tables["staff"].Rows.Count==0)
             {
-                Console.WriteLine("Invalid Login");
+                msg = "Invalid Login";
+                return msg;
+
             }
             else
             {
-            
+    
+                msg = "";
+                return msg;
+
             }
         }
     
