@@ -25,12 +25,14 @@ namespace Automatic_Scheduling_App.Pages
         private MySqlConnection database { get; set; }
         public string signin { get; set; }
         public string manager { get; set; }
+        public string userValid { get; set; }
         public string loading { get; set; }
         public string prevDis { get; set; }
         public string nextDis { get; set; }
         private int display_week;
         public string week_name { get; set; }
         public string week_day { get; set; }
+        private int user_id;
         public List<string> weeks { get; set; }
 
         public List<Tuple<string, TimeSpan, TimeSpan, string, string>> week_list { get; set; }
@@ -48,6 +50,7 @@ namespace Automatic_Scheduling_App.Pages
             _logger = logger;
             signin = "LogOut";
             manager = "block";
+            userValid = "block";
             display_week = 0;
 
             loadWeekDates();
@@ -170,7 +173,7 @@ namespace Automatic_Scheduling_App.Pages
 
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             // when lending on page first time
             nextDis = "";
@@ -191,16 +194,23 @@ namespace Automatic_Scheduling_App.Pages
                 ListByDay(display_week, "mon");
             }
 
-            
+            try // verify user
+            {
+                user_id = (int)HttpContext.Session.GetInt32("user_id");
+            }
+            catch (Exception ex)
+            {
+                user_id = 0;
+            }
+
+            // try sent user back to index if he tries coming back here without login
+            if (user_id == 0)
+                return RedirectToPage("Index");
+
+            return Page();
         }
         public void OnPost()
         {
-
-            // newAssignment.AutoScheduler(week_name, start_date);
-
-            // newAssignment.AutoScheduler(week_name_2, start_date_2);
-
-            // newAssignment.AutoScheduler(week_name_3, start_date_3);
 
             try
             {
@@ -275,7 +285,6 @@ namespace Automatic_Scheduling_App.Pages
             }
             else
             {
-                Console.WriteLine(week_day);
                 // display each day
                 ListByDay(display_week, week_day);
             }

@@ -22,6 +22,8 @@ namespace Automatic_Scheduling_App.Pages
         private int reset;
         private bool errorFound;
         public string manager { get; set; }
+        private int manager_id;
+        public string userValid { get; set; }
         public string signin { get; set; }
         public string updated { get; set; }
         public string updateFail { get; set; }
@@ -33,7 +35,8 @@ namespace Automatic_Scheduling_App.Pages
             database = new MySqlConnection(db_config);
 
             signin = "LogOut";
-            manager = "block";
+            manager = "none";
+            userValid = "block";
 
             errorFound = false;
 
@@ -104,10 +107,12 @@ namespace Automatic_Scheduling_App.Pages
             try
             {
                 user_id = (int)HttpContext.Session.GetInt32("user_id");
+                manager_id = (int)HttpContext.Session.GetInt32("manager_id");
             }
             catch (Exception ex)
             {
                 user_id = 0;
+                manager_id = 0;
                 // no need to access database if user does not exists
                 return;
             }
@@ -238,7 +243,6 @@ namespace Automatic_Scheduling_App.Pages
             finally { database.Close(); }
         }
 
-
         private void UpdateUserData()
         {
             try
@@ -354,6 +358,9 @@ namespace Automatic_Scheduling_App.Pages
             // try sent user back to index if he tries coming back here without login
             if (user_id == 0)
                 return RedirectToPage("Index");
+
+            if (manager_id > 0)
+                manager = "block";
 
             return Page();
         }

@@ -24,6 +24,7 @@ namespace Automatic_Scheduling_App.Pages
         public int range { get; set; }
         public Dictionary<string, string> userData { get; set; }
         public string manager { get; set; }
+        public string userValid { get; set; }
         public string signin { get; set; }
 
         public employeeViewModel(ILogger<employeeViewModel> logger)
@@ -34,6 +35,7 @@ namespace Automatic_Scheduling_App.Pages
 
             signin = "LogOut";
             manager = "block";
+            userValid = "block";
 
             range = 0;
         }

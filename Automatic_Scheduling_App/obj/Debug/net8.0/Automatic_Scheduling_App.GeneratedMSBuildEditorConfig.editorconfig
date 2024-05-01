@@ -54,18 +54,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Documents/GitHub/WYND-AUTOSCHED/Automatic_Scheduling_App/Pages/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/user/Documents/GitHub/WYND-AUTOSCHED/Automatic_Scheduling_App/Pages/Mgt_Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWd0X0luZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/user/Documents/GitHub/WYND-AUTOSCHED/Automatic_Scheduling_App/Pages/NewEmployee.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3RW1wbG95ZWUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/user/Documents/GitHub/WYND-AUTOSCHED/Automatic_Scheduling_App/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -84,14 +72,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/user/Documents/GitHub/WYND-AUTOSCHED/Automatic_Scheduling_App/Views/Department/AddDepartment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxBZGREZXBhcnRtZW50LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/user/Documents/GitHub/WYND-AUTOSCHED/Automatic_Scheduling_App/Views/Employee/AddInfo.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcQWRkSW5mby5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/user/Documents/GitHub/WYND-AUTOSCHED/Automatic_Scheduling_App/Views/Employee/employee_Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcZW1wbG95ZWVfSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/Documents/GitHub/WYND-AUTOSCHED/Automatic_Scheduling_App/Views/Shared/_SchedulePartial.cshtml]

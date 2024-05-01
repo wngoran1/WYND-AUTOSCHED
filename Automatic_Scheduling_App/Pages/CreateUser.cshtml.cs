@@ -18,6 +18,7 @@ namespace Automatic_Scheduling_App.Pages
         private MySqlConnection database { get; set; }
         private int user_id;
         public string manager { get; set; }
+        public string userValid { get; set; }
         public string message { get; set; }
         public string signin { get; set; }
         public Dictionary<string, int> departments { get; set; }
@@ -36,6 +37,7 @@ namespace Automatic_Scheduling_App.Pages
 
             signin = "LogOut";
             manager = "block";
+            userValid = "block";
             message = "";
 
             loadDepartments();

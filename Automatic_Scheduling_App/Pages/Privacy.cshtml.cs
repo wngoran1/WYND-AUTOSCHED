@@ -9,11 +9,13 @@ namespace Automatic_Scheduling_App.Pages
         private readonly ILogger<PrivacyModel> _logger;
 
         public string manager { get; set; }
+        public string userValid { get; set; }
         public string signin { get; set; }
         public PrivacyModel(ILogger<PrivacyModel> logger)
         {
             _logger = logger;
             manager = "none";
+            userValid = "none";
             signin = "WYND Solutions";
         }
 

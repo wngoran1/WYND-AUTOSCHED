@@ -17,7 +17,9 @@ namespace Automatic_Scheduling_App.Pages
         private string db_config = "server=wnprojectdb.chyi8sy82mh3.us-east-2.rds.amazonaws.com;port=3306;database=schedule_app;uid=admin;password=adminroot;";
         private MySqlConnection database { get; set; }
         public string manager { get; set; }
-
+        public int manager_id;
+        private int user_id;
+        public string userValid { get; set; }
         public string signin { get; set; }
 
         public dashboardModel(ILogger<dashboardModel> logger)
@@ -25,7 +27,8 @@ namespace Automatic_Scheduling_App.Pages
             _logger = logger;
             database = new MySqlConnection(db_config);
             signin = "LogOut";
-            manager = "block";
+            userValid = "block";
+            manager = "none";
         }
 
         //User Data variables
@@ -57,7 +60,7 @@ namespace Automatic_Scheduling_App.Pages
         public string satbg = DateTime.Today.DayOfWeek == DayOfWeek.Saturday ? "lightcyan" : "white";
         public string sunbg = DateTime.Today.DayOfWeek == DayOfWeek.Sunday ? "lightcyan" : "white";
 
-        private void SetUserData(int user_id)
+        private void SetUserData()
         {
             List<string> user = [];
             try
@@ -131,7 +134,7 @@ namespace Automatic_Scheduling_App.Pages
             return week_id;
         }
 
-        private void SetCalendarDays(int user_id)
+        private void SetCalendarDays()
         {
             // collect week start dates for current and next
             DateTime today = DateTime.Today;
@@ -162,17 +165,17 @@ namespace Automatic_Scheduling_App.Pages
             foreach (string weekday in weekdays)
             {
                 if (currweek_id > 0)
-                    Download_employee_schedule_for(1, currweek_id, user_id, weekday);
+                    Download_employee_schedule_for(1, currweek_id, weekday);
 
                 if (nextweek_id > 0)
-                    Download_employee_schedule_for(2, nextweek_id, user_id, weekday);
+                    Download_employee_schedule_for(2, nextweek_id, weekday);
 
                 if (thirdweek_id > 0)
-                    Download_employee_schedule_for(3, thirdweek_id, user_id, weekday);
+                    Download_employee_schedule_for(3, thirdweek_id, weekday);
             }
         }
 
-        private void Download_employee_schedule_for(int currweek, int week_id, int user_id, string day)
+        private void Download_employee_schedule_for(int currweek, int week_id, string day)
         {
             int currday = -1;
 
@@ -238,7 +241,7 @@ namespace Automatic_Scheduling_App.Pages
         {
             // initialize startup variables
             // database = new MySqlConnection(db_config);
-            int user_id;
+
             // initialize current week data
 
             currweek_days = new List<int>(new int[7]);
@@ -258,17 +261,22 @@ namespace Automatic_Scheduling_App.Pages
             try
             {
                 user_id = (int)HttpContext.Session.GetInt32("user_id");
+                manager_id = (int)HttpContext.Session.GetInt32("manager_id");
             }
             catch (Exception ex) {
                 user_id = 0;
+                manager_id = 0;
             }
 
             // try sent user back to index if he tries coming back here without login
             if (user_id == 0)
                 return RedirectToPage("Index");
 
-            SetUserData(user_id);
-            SetCalendarDays(user_id);
+            if (manager_id > 0)
+                manager = "block";
+
+            SetUserData();
+            SetCalendarDays();
 
             return Page();
 
@@ -276,7 +284,7 @@ namespace Automatic_Scheduling_App.Pages
 
         public IActionResult OnPost()
         {
-            int user_id = int.Parse(Request.Form["userId"]);
+            user_id = int.Parse(Request.Form["userId"]);
             HttpContext.Session.SetInt32("user_id", user_id);
             return RedirectToPage();
         }

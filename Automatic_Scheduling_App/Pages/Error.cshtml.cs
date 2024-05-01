@@ -14,8 +14,15 @@ namespace Automatic_Scheduling_App.Pages
 
         private readonly ILogger<ErrorModel> _logger;
 
+        public string manager { get; set; }
+        public string userValid { get; set; }
+        public string signin { get; set; }
+
         public ErrorModel(ILogger<ErrorModel> logger)
         {
+            signin = "WYND Solutions";
+            manager = "none";
+            userValid = "none";
             _logger = logger;
         }
 
