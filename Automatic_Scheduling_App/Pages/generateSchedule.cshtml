@@ -17,56 +17,97 @@
 </div>
 
 <center>
-    <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">NOTICE !</h4>
-        <p style="font-size: 20px;">This page will generates the schedules for the current week, and 2 upcoming weeks starting monday</p>
-        <p style="font-size: 20px;">It relies on the data stored in the weekly and daily business needs database for each department</p>
+    <div id="schgenerate" class="alert alert-success" role="alert" style="background-image: @Model.loading;">
+        <form method="post">
+            <button id="addAssignmentBtn" name="reset_all" class="btn btn-warning" action="" style="font-size: 20px;">Rebuild All Schedules</button>
+        </form>
+        <br />
+        <p style="font-size: 20px;">Generates 4 weeks schedules</p>
+        <p style="font-size: 20px;">use the <b>RESET</b> button bellow to generate the indexed week only</p>
         <hr />
-        <p id="completionUpdate" class="mb-0"><b>@Model.message</b></p>
-        <div id="progress" class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="@Model.complete" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar text-bg-warning" style="width: @Model.complete%">@Model.complete%</div>
-        </div>
+        <p id="completionUpdate" class="mb-0" style="margin-bottom: 15px;"><b>@Model.message</b></p>
     </div>
 </center>
 
-<div id="schgenerate" class="jumbotron">
-    <center>
-        <form method="post">     
-            <button id="addAssignmentBtn" class="btn btn-primary" action="" style="font-size: 20px;">Make Schedules</button>
-        </form>
-    </center>
-</div>
+<center>
+    <form method="post">
+        <div class="form-row justify-content-sm-center">
+            <button id="resetbut" type="submit" name="reset_week" class="btn btn-outline-success" action="">
+                <img src="/schreset.svg" class="img-fluid" alt="..." style="width: 60px; height: auto;">
+            </button>
+        </div>
+        <div class="form-row justify-content-sm-center">
+            <div class="col-md-2">
+                <div class="col-12">
+                    <button type="submit" name="prevbut" class="btn btn-success" @Model.prevDis>Prev.</button>
+                </div>
+            </div>
+            <div class="col-md-3" style="color:white; background-color:coral; font-size: 20px; box-shadow: 2px 2px 5px gray;">
+                <p style="margin-top: 5px;"><b>@Model.week_name</b></p>
+            </div>
+            <div class="col-md-2">
+                <div class="col-12">
+                    <button type="submit" name="nextbut" class="btn btn-success" @Model.nextDis>Next</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</center>
 
 <script>
     document.getElementById("addAssignmentBtn").addEventListener("click", function () {
-        var newValue = 0;
-        // Function to update the progress bar
-        function updateProgressBar() {
-            // Get the progress bar element
-            var progressBar = document.querySelector('.progress-bar');
-
-            // Get the current progress value
-            // var currentValue = parseInt(progressBar.textContent.replace('%', ''));
-
-            // Increment the progress value by 1 (you can adjust this value)
-            newValue++;
-
-            if (newValue < 97) {
-                // Update the width of the progress bar
-                progressBar.style.width = newValue + '%';
-
-                // Update the text inside the progress bar
-                progressBar.textContent = newValue + '%';
-
-                document.getElementById("completionUpdate").innerHTML = "<b>Please Wait! System is Loading. DO NOT CLOSE THIS PAGE</b>";
-            } else {
-                // If the value reaches 100, clear the interval to stop updating
-                clearInterval(progressInterval);
-            }
-        }
-
-        // Update the progress bar every 1 seconds
-        var progressInterval = setInterval(updateProgressBar, 810);
-        updateProgressBar();
+        document.getElementById("schgenerate").style.backgroundImage = "url('/backgr3.gif')";
+        document.getElementById("completionUpdate").innerHTML = "<b>Please Wait! System is Loading. DO NOT CLOSE THIS PAGE</b>";
     });
 </script>
+
+<script>
+    document.getElementById("resetbut").addEventListener("click", function () {
+        document.getElementById("schgenerate").style.backgroundImage = "url('/backgr3.gif')";
+        document.getElementById("completionUpdate").innerHTML = "<b>Please Wait! System is Loading. DO NOT CLOSE THIS PAGE</b>";
+    });
+</script>
+
+<br />
+<br />
+<form method="post">
+    <div class="form-row" style="background-color:orange;">
+        <button type="submit" name="reset_day" class="btn btn-outline-dark">
+            <img src="/refresh.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+        </button>
+        <select name="week_day" class="form-select rounded" style="background-color:orange; font-size: 30px; width:fit-content; height: auto; margin-left: 10px;">
+            <option selected>@Model.week_day</option>
+            <option value="mon">Monday</option>
+            <option value="tue">Tuesday</option>
+            <option value="wed">Wednesday</option>
+            <option value="thu">Thursday</option>
+            <option value="fri">Friday</option>
+            <option value="sat">Saturday</option>
+            <option value="sun">Sunday</option>
+        </select>
+    </div>
+</form>
+
+<table id="empdisplay" class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Department</th>
+            <th scope="col">Shift Start</th>
+            <th scope="col">Shift End</th>
+            <th scope="col">Employee</th>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.week_list)
+        {
+            <tr>
+                <td>@user.Item1</td>
+                <td>@user.Item2</td>
+                <td>@user.Item3</td>
+                <td>@user.Item4</td>
+                <td>@user.Item5</td>
+            </tr>
+        }
+    </tbody>
+</table>

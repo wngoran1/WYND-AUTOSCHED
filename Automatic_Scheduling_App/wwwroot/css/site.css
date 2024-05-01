@@ -125,7 +125,7 @@ body {
 }
 
 .image-button2 {
-    width: 80px; /* Adjust width and height as needed */
+    width: 80px; 
     height: 50px;
     background-color: transparent;
     border: none; /* Remove default button border */
@@ -147,7 +147,7 @@ body {
 
 #schgenerate {
     /**/
-    background-image: url('/backgr3.gif');
+    /*background-image: url('/backgr3.gif'); */
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -182,7 +182,10 @@ body {
     .empupd input[type="password"] {
         font-size: 20px; /* Change the font size to your desired value */
     }
-    
+
+#empdisplay {
+    font-size: 20px; /* Change the font size for page 2 */
+}
 
 .emplogin {
     font-size: 20px; /* Change the font size for page 2 */

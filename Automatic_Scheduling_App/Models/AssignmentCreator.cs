@@ -245,8 +245,6 @@ namespace Automatic_Scheduling_App.Models
                 {
                     week_id = Convert.ToInt32(result);
 
-                    Console.WriteLine("Deleting existing ID " + week_id);
-
                     string deletequery = "delete from assignment where week_id = @weekID";
                     MySqlCommand delete = new MySqlCommand(deletequery, database);
                     delete.Parameters.AddWithValue("@weekID", week_id);

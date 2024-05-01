@@ -1,0 +1,106 @@
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-ku8d5zrt8x] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-ku8d5zrt8x] {
+  color: #0077cc;
+}
+
+.btn-primary[b-ku8d5zrt8x] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-ku8d5zrt8x], .nav-pills .show > .nav-link[b-ku8d5zrt8x] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-ku8d5zrt8x] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-ku8d5zrt8x] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-ku8d5zrt8x] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-ku8d5zrt8x] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-ku8d5zrt8x] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+body[b-ku8d5zrt8x] {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header[b-ku8d5zrt8x] {
+    background-color: #5F8575;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bell-icon[b-ku8d5zrt8x],
+.hamburger-icon[b-ku8d5zrt8x] {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+nav ul[b-ku8d5zrt8x] {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li[b-ku8d5zrt8x] {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a[b-ku8d5zrt8x] {
+    font-family: Arial Black, Arial, sans-serif;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.dropdown-content[b-ku8d5zrt8x] {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content a[b-ku8d5zrt8x] {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover[b-ku8d5zrt8x] {
+    background-color: #555;
+}

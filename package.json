@@ -1,0 +1,14 @@
+{
+  "name": "wynd-autosched",
+  "version": "1.0.0",
+  "description": "Login Page:\r * cross check inputted info with database to see if that exists. If so, allow the person in and set their acct so we can see schedule.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}
