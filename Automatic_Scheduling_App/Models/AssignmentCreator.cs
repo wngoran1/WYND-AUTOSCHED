@@ -261,11 +261,11 @@ namespace Automatic_Scheduling_App.Models
                     insert.Parameters.AddWithValue("@WeekDay", start_date);
                     insert.ExecuteNonQuery();
 
-                    // SQL query to retrieve the id of the last week created above
+                    /* SQL query to retrieve the id of the last week created above
                     string getQ = "select week_id from weekframe " +
                             "where week_name = @WeekName order by week_id DESC";
                     MySqlCommand retrieve = new MySqlCommand(getQ, database);
-                    retrieve.Parameters.AddWithValue("@WeekName", week_name);
+                    retrieve.Parameters.AddWithValue("@WeekName", week_name);*/
 
                     week_id = (int)select.ExecuteScalar();
                 }

@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Automatic_Scheduling_App.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\addtime.svg",
+      "PackagePath": "staticwebassets\\addtime.svg"
+    },
+    {
       "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\adduser.svg",
       "PackagePath": "staticwebassets\\adduser.svg"
     },
@@ -21,8 +25,16 @@
       "PackagePath": "staticwebassets\\backgr3.gif"
     },
     {
+      "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\bcal.svg",
+      "PackagePath": "staticwebassets\\bcal.svg"
+    },
+    {
       "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\bellicon.png",
       "PackagePath": "staticwebassets\\bellicon.png"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\config.svg",
+      "PackagePath": "staticwebassets\\config.svg"
     },
     {
       "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\css\\site.css",
@@ -35,6 +47,10 @@
     {
       "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\lcal.svg",
+      "PackagePath": "staticwebassets\\lcal.svg"
     },
     {
       "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\lib\\bootstrap\\LICENSE",

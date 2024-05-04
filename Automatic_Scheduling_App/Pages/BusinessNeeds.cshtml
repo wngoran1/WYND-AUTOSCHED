@@ -3,150 +3,918 @@
 @{
     ViewData["Title"] = "Business Needs!";
 }
-<style>
-    /* Style the line */
-    .horizontal-line {
-        width: 100%; /* Make the line span the entire width of the screen */
-        height: 10px; /* Set the height of the line */
-        background-color: black; /* Set the color of the line */
-        margin-top: 20px; /* Add some space above the line */
-        margin-bottom: 20px; /* Add some space below the line */
-    }
-</style>
+
 <br>
 <br>
-<div class="container">
-    <h2>Assignments Needed Editor</h2>
+<div class="jumbotron busyneed">
     <center>
-        <div id="assignmentContainer"></div>
-        <button id="addAssignmentBtn">Add a Needed Time</button>
-        <br><br>
-        <button id="grabAssignmentFromDB">Grab Current Needed Times</button>
-        <br><br>
-        <button id="submitAssignmentChanges">Submit Changes to Business Times Needed</button>
-    </center>
+        <h1>Businees Needs Confirguration</h1>
+        <br />
+        <form method="post">
+            <div class="form-row justify-content-center" style="background-color:azure; box-shadow: 2px 2px 5px gray;">
+                <div class="col-md-6">
+                    <label for="dept_name" class="form-label" style="color:coral; margin-top: 20px;">Select a Department to Configure</label>
+                    <br />
+                    <select id="dept_name" name="dept_id" class="form-select rounded" style=" font-size: 20px; width:fit-content; height: 40px; margin-bottom: 20px; background-color:lightyellow;">
+                        <option selected value="@Model.dept_id">@Model.dept_name</option>
+                        @foreach (var dept in Model.departments)
+                        {
+                            <option value="@dept.Key">@dept.Value</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <br />
+                    <button type="submit" name="dept_update" class="btn btn-outline-info">
+                        <img src="/config.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+                    </button>
+                </div>
+            </div>
+        </form>
+        <br />
+        <form method="post">
+            <div class="form-row">
+                <div class="col-md-8">
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                        <input type="checkbox" name="mon_w1" style="accent-color:green;" class="btn-check" id="mon_w1" @Model.weekP1[0] autocomplete="off">
+                        <label class="btn btn-outline-success" for="mon_w1">MON</label>
 
-    <div class="horizontal-line"></div>
+                        <input type="checkbox" name="tue_w1" style="accent-color:green;" class="btn-check" id="tue_w1" @Model.weekP1[1] autocomplete="off">
+                        <label class="btn btn-outline-success" for="tue_w1">TUE</label>
 
-    <br>
+                        <input type="checkbox" name="wed_w1" style="accent-color:green;" class="btn-check" id="wed_w1" @Model.weekP1[2] autocomplete="off">
+                        <label class="btn btn-outline-success" for="wed_w1">WED</label>
 
-    <h2>Needed Times Editor:</h2>
-    <center>
-        <div id="scheduleContainer">
-            <!-- New schedule sets will be added here -->
+                        <input type="checkbox" name="thu_w1" style="accent-color:green;" class="btn-check" id="thu_w1" @Model.weekP1[3] autocomplete="off">
+                        <label class="btn btn-outline-success" for="thu_w1">THU</label>
+
+                        <input type="checkbox" name="fri_w1" style="accent-color:green;" class="btn-check" id="fri_w1" @Model.weekP1[4] autocomplete="off">
+                        <label class="btn btn-outline-success" for="fri_w1">FRI</label>
+
+                        <input type="checkbox" name="sat_w1" style="accent-color:green;" class="btn-check" id="sat_w1" @Model.weekP1[5] autocomplete="off">
+                        <label class="btn btn-outline-success" for="sat_w1">SAT</label>
+
+                        <input type="checkbox" name="sun_w1" style="accent-color:green;" class="btn-check" id="sun_w1" @Model.weekP1[6] autocomplete="off">
+                        <label class="btn btn-outline-success" for="sun_w1">SUN</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <span id="valueText1">Pattern 1: @Model.ratio_w1%</span><br>
+                    <input type="range" id="slider1" name="ratio1" style="accent-color:green;" min="0" max="100" step="5" value="@Model.ratio_w1">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-8">
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                        <input type="checkbox" name="mon_w2" class="btn-check" id="mon_w2" @Model.weekP2[0] autocomplete="off">
+                        <label class="btn btn-outline-primary" for="mon_w2">MON</label>
+
+                        <input type="checkbox" name="tue_w2" class="btn-check" id="tue_w2" @Model.weekP2[1] autocomplete="off">
+                        <label class="btn btn-outline-primary" for="tue_w2">TUE</label>
+
+                        <input type="checkbox" name="wed_w2" class="btn-check" id="wed_w2" @Model.weekP2[2] autocomplete="off">
+                        <label class="btn btn-outline-primary" for="wed_w2">WED</label>
+
+                        <input type="checkbox" name="thu_w2" class="btn-check" id="thu_w2" @Model.weekP2[3] autocomplete="off">
+                        <label class="btn btn-outline-primary" for="thu_w2">THU</label>
+
+                        <input type="checkbox" name="fri_w2" class="btn-check" id="fri_w2" @Model.weekP2[4] autocomplete="off">
+                        <label class="btn btn-outline-primary" for="fri_w2">FRI</label>
+
+                        <input type="checkbox" name="sat_w2" class="btn-check" id="sat_w2" @Model.weekP2[5] autocomplete="off">
+                        <label class="btn btn-outline-primary" for="sat_w2">SAT</label>
+
+                        <input type="checkbox" name="sun_w2" class="btn-check" id="sun_w2" @Model.weekP2[6] autocomplete="off">
+                        <label class="btn btn-outline-primary" for="sun_w2">SUN</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <span id="valueText2">Pattern 2: @Model.ratio_w2%</span><br>
+                    <input type="range" id="slider2" name="ratio2" min="0" max="100" step="5" value="@Model.ratio_w2">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-8">
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                        <input type="checkbox" name="mon_w3" style="accent-color:red;" class="btn-check" id="mon_w3" @Model.weekP3[0] autocomplete="off">
+                        <label class="btn btn-outline-danger" for="mon_w3">MON</label>
+
+                        <input type="checkbox" name="tue_w3" style="accent-color:red;" class="btn-check" id="tue_w3" @Model.weekP3[1] autocomplete="off">
+                        <label class="btn btn-outline-danger" for="tue_w3">TUE</label>
+
+                        <input type="checkbox" name="wed_w3" style="accent-color:red;" class="btn-check" id="wed_w3" @Model.weekP3[2] autocomplete="off">
+                        <label class="btn btn-outline-danger" for="wed_w3">WED</label>
+
+                        <input type="checkbox" name="thu_w3" style="accent-color:red;" class="btn-check" id="thu_w3" @Model.weekP3[3] autocomplete="off">
+                        <label class="btn btn-outline-danger" for="thu_w3">THU</label>
+
+                        <input type="checkbox" name="fri_w3" style="accent-color:red;" class="btn-check" id="fri_w3" @Model.weekP3[4] autocomplete="off">
+                        <label class="btn btn-outline-danger" for="fri_w3">FRI</label>
+
+                        <input type="checkbox" name="sat_w3" style="accent-color:red;" class="btn-check" id="sat_w3" @Model.weekP3[5] autocomplete="off">
+                        <label class="btn btn-outline-danger" for="sat_w3">SAT</label>
+
+                        <input type="checkbox" name="sun_w3" style="accent-color:red;" class="btn-check" id="sun_w3" @Model.weekP3[6] autocomplete="off">
+                        <label class="btn btn-outline-danger" for="sun_w3">SUN</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <span id="valueText3">Pattern 3: @Model.ratio_w3%</span><br>
+                    <input type="range" id="slider3" name="ratio3" style="accent-color: red; acc" min="0" max="100" step="5" value="@Model.ratio_w3">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-8">
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                        <input type="checkbox" name="mon_w4" style="accent-color:orange;" class="btn-check" id="mon_w4" @Model.weekP4[0] autocomplete="off">
+                        <label class="btn btn-outline-warning" for="mon_w4">MON</label>
+
+                        <input type="checkbox" name="tue_w4" style="accent-color:orange;" class="btn-check" id="tue_w4" @Model.weekP4[1] autocomplete="off">
+                        <label class="btn btn-outline-warning" for="tue_w4">TUE</label>
+
+                        <input type="checkbox" name="wed_w4" style="accent-color:orange;" class="btn-check" id="wed_w4" @Model.weekP4[2] autocomplete="off">
+                        <label class="btn btn-outline-warning" for="wed_w4">WED</label>
+
+                        <input type="checkbox" name="thu_w4" style="accent-color:orange;" class="btn-check" id="thu_w4" @Model.weekP4[3] autocomplete="off">
+                        <label class="btn btn-outline-warning" for="thu_w4">THU</label>
+
+                        <input type="checkbox" name="fri_w4" style="accent-color:orange;" class="btn-check" id="fri_w4" @Model.weekP4[4] autocomplete="off">
+                        <label class="btn btn-outline-warning" for="fri_w4">FRI</label>
+
+                        <input type="checkbox" name="sat_w4" style="accent-color:orange;" class="btn-check" id="sat_w4" @Model.weekP4[5] autocomplete="off">
+                        <label class="btn btn-outline-warning" for="sat_w4">SAT</label>
+
+                        <input type="checkbox" name="sun_w4" style="accent-color:orange;" class="btn-check" id="sun_w4" @Model.weekP4[6] autocomplete="off">
+                        <label class="btn btn-outline-warning" for="sun_w4">SUN</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <span id="valueText4">Pattern 4: @Model.ratio_w4%</span><br>
+                    <input type="range" id="slider4" name="ratio4" style="accent-color:orange;" min="0" max="100" step="5" value="@Model.ratio_w4" readonly>
+                </div>
+            </div>
+            
+            <br />
+            <p><b>@Model.message</b></p>
+            <p><b>@Model.time_message</b></p>
+
+            <button id="addAssignmentBtn" name="update_busy_need" class="btn btn-warning" type="submit" style="font-size: 20px; margin-top: 20px;">Update Business Needs</button>
+        </form>
+        <br />
+        <button id="add_time" name="add_time" class="btn btn-outline-warning" style="display: @Model.addtime_but !important">
+            <img src="/addtime.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+        </button>
+        
+        <div id="edit_time" class="form-control" style="background-color:transparent; display: @Model.addtime !important">
+            <form method="post">
+                <div class="form-row justify-content-center" style="background-color:lightyellow;">
+                    <div class="col-md-1">
+                        <b>MON</b><br />
+                        <button name="upd_mon" class="btn btn-outline-light">
+                            <img src="/bcal.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="mon_t1_st" value="@Model.monTimes[0]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="mon_t1_et" value="@Model.monTimes[1]"><br />
+                        <small id="mon_valueText1">Time1: @Model.monRatio[0]%</small><br />
+                        <input type="range" id="mon_slider1" name="mon_ratio1" style="accent-color:black;" min="0" max="100" step="10" value="@Model.monRatio[0]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="mon_t2_st" value="@Model.monTimes[2]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="mon_t2_et" value="@Model.monTimes[3]"><br />
+                        <small id="mon_valueText2">Time2: @Model.monRatio[1]%</small><br />
+                        <input type="range" id="mon_slider2" name="mon_ratio2" style="accent-color:black;" min="0" max="100" step="10" value="@Model.monRatio[1]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="mon_t3_st" value="@Model.monTimes[4]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="mon_t3_et" value="@Model.monTimes[5]"><br />
+                        <small id="mon_valueText3">Time3: @Model.monRatio[2]%</small><br />
+                        <input type="range" id="mon_slider3" name="mon_ratio3" style="accent-color:black;" min="0" max="100" step="10" value="@Model.monRatio[2]" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row justify-content-center" style="background-color:azure;">
+                    <div class="col-md-1">
+                        <b>TUE</b><br />
+                        <button name="upd_tue" class="btn btn-outline-light">
+                            <img src="/lcal.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="tue_t1_st" value="@Model.tueTimes[0]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="tue_t1_et" value="@Model.tueTimes[1]"><br />
+                        <small id="tue_valueText1">Time1: @Model.tueRatio[0]%</small><br />
+                        <input type="range" id="tue_slider1" name="tue_ratio1" style="accent-color:black;" min="0" max="100" step="10" value="@Model.tueRatio[0]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="tue_t2_st" value="@Model.tueTimes[2]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="tue_t2_et" value="@Model.tueTimes[3]"><br />
+                        <small id="tue_valueText2">Time2: @Model.tueRatio[1]%</small><br />
+                        <input type="range" id="tue_slider2" name="tue_ratio2" style="accent-color:black;" min="0" max="100" step="10" value="@Model.tueRatio[1]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="tue_t3_st" value="@Model.tueTimes[4]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="tue_t3_et" value="@Model.tueTimes[5]"><br />
+                        <small id="tue_valueText3">Time3: @Model.tueRatio[2]%</small><br />
+                        <input type="range" id="tue_slider3" name="tue_ratio3" style="accent-color:black;" min="0" max="100" step="10" value="@Model.tueRatio[2]" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row justify-content-center" style="background-color:lightyellow;">
+                    <div class="col-md-1">
+                        <b>WED</b><br />
+                        <button name="upd_wed" class="btn btn-outline-light">
+                            <img src="/bcal.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="wed_t1_st" value="@Model.wedTimes[0]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="wed_t1_et" value="@Model.wedTimes[1]"><br />
+                        <small id="wed_valueText1">Time1: @Model.wedRatio[0]%</small><br />
+                        <input type="range" id="wed_slider1" name="wed_ratio1" style="accent-color:black;" min="0" max="100" step="10" value="@Model.wedRatio[0]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="wed_t2_st" value="@Model.wedTimes[2]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="wed_t2_et" value="@Model.wedTimes[3]"><br />
+                        <small id="wed_valueText2">Time2: @Model.wedRatio[1]%</small><br />
+                        <input type="range" id="wed_slider2" name="wed_ratio2" style="accent-color:black;" min="0" max="100" step="10" value="@Model.wedRatio[1]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="wed_t3_st" value="@Model.wedTimes[4]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="wed_t3_et" value="@Model.wedTimes[5]"><br />
+                        <small id="wed_valueText3">Time3: @Model.wedRatio[2]%</small><br />
+                        <input type="range" id="wed_slider3" name="wed_ratio3" style="accent-color:black;" min="0" max="100" step="10" value="@Model.wedRatio[2]" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row justify-content-center" style="background-color:azure;">
+                    <div class="col-md-1">
+                        <b>THU</b><br />
+                        <button name="upd_thu" class="btn btn-outline-light">
+                            <img src="/lcal.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="thu_t1_st" value="@Model.thuTimes[0]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="thu_t1_et" value="@Model.thuTimes[1]"><br />
+                        <small id="thu_valueText1">Time1: @Model.thuRatio[0]%</small><br />
+                        <input type="range" id="thu_slider1" name="thu_ratio1" style="accent-color:black;" min="0" max="100" step="10" value="@Model.thuRatio[0]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="thu_t2_st" value="@Model.thuTimes[2]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="thu_t2_et" value="@Model.thuTimes[3]"><br />
+                        <small id="thu_valueText2">Time2: @Model.thuRatio[1]%</small><br />
+                        <input type="range" id="thu_slider2" name="thu_ratio2" style="accent-color:black;" min="0" max="100" step="10" value="@Model.thuRatio[1]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="thu_t3_st" value="@Model.thuTimes[4]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="thu_t3_et" value="@Model.thuTimes[5]"><br />
+                        <small id="thu_valueText3">Time3: @Model.thuRatio[2]%</small><br />
+                        <input type="range" id="thu_slider3" name="thu_ratio3" style="accent-color:black;" min="0" max="100" step="10" value="@Model.thuRatio[2]" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row justify-content-center" style="background-color:lightyellow;">
+                    <div class="col-md-1">
+                        <b>FRI</b><br />
+                        <button name="upd_fri" class="btn btn-outline-light">
+                            <img src="/bcal.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="fri_t1_st" value="@Model.friTimes[0]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="fri_t1_et" value="@Model.friTimes[1]"><br />
+                        <small id="fri_valueText1">Time1: @Model.friRatio[0]%</small><br />
+                        <input type="range" id="fri_slider1" name="fri_ratio1" style="accent-color:black;" min="0" max="100" step="10" value="@Model.friRatio[0]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="fri_t2_st" value="@Model.friTimes[2]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="fri_t2_et" value="@Model.friTimes[3]"><br />
+                        <small id="fri_valueText2">Time2: @Model.friRatio[1]%</small><br />
+                        <input type="range" id="fri_slider2" name="fri_ratio2" style="accent-color:black;" min="0" max="100" step="10" value="@Model.friRatio[1]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="fri_t3_st" value="@Model.friTimes[4]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="fri_t3_et" value="@Model.friTimes[5]"><br />
+                        <small id="fri_valueText3">Time3: @Model.friRatio[2]%</small><br />
+                        <input type="range" id="fri_slider3" name="fri_ratio3" style="accent-color:black;" min="0" max="100" step="10" value="@Model.friRatio[2]" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row justify-content-center" style="background-color:azure;">
+                    <div class="col-md-1">
+                        <b>SAT</b><br />
+                        <button name="upd_sat" class="btn btn-outline-light">
+                            <img src="/lcal.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="sat_t1_st" value="@Model.satTimes[0]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="sat_t1_et" value="@Model.satTimes[1]"><br />
+                        <small id="sat_valueText1">Time1: @Model.satRatio[0]%</small><br />
+                        <input type="range" id="sat_slider1" name="sat_ratio1" style="accent-color:black;" min="0" max="100" step="10" value="@Model.satRatio[0]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="sat_t2_st" value="@Model.satTimes[2]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="sat_t2_et" value="@Model.satTimes[3]"><br />
+                        <small id="sat_valueText2">Time2: @Model.satRatio[1]%</small><br />
+                        <input type="range" id="sat_slider2" name="sat_ratio2" style="accent-color:black;" min="0" max="100" step="10" value="@Model.satRatio[1]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="sat_t3_st" value="@Model.satTimes[4]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="sat_t3_et" value="@Model.satTimes[5]"><br />
+                        <small id="sat_valueText3">Time3: @Model.satRatio[2]%</small><br />
+                        <input type="range" id="sat_slider3" name="sat_ratio3" style="accent-color:black;" min="0" max="100" step="10" value="@Model.satRatio[2]" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row justify-content-center" style="background-color:lightyellow;">
+                    <div class="col-md-1">
+                        <b>SUN</b><br />
+                        <button name="upd_sun" class="btn btn-outline-light">
+                            <img src="/bcal.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="sun_t1_st" value="@Model.sunTimes[0]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="sun_t1_et" value="@Model.sunTimes[1]"><br />
+                        <small id="sun_valueText1">Time1: @Model.sunRatio[0]%</small><br />
+                        <input type="range" id="sun_slider1" name="sun_ratio1" style="accent-color:black;" min="0" max="100" step="10" value="@Model.sunRatio[0]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="sun_t2_st" value="@Model.sunTimes[2]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="sun_t2_et" value="@Model.sunTimes[3]"><br />
+                        <small id="sun_valueText2">Time2: @Model.sunRatio[1]%</small><br />
+                        <input type="range" id="sun_slider2" name="sun_ratio2" style="accent-color:black;" min="0" max="100" step="10" value="@Model.sunRatio[1]">
+                    </div>
+                    <div class="col-md-3">
+                        <small>Start:</small><br />
+                        <input type="time" name="sun_t3_st" value="@Model.sunTimes[4]"><br />
+                        <small>End:</small><br />
+                        <input type="time" name="sun_t3_et" value="@Model.sunTimes[5]"><br />
+                        <small id="sun_valueText3">Time3: @Model.sunRatio[2]%</small><br />
+                        <input type="range" id="sun_slider3" name="sun_ratio3" style="accent-color:black;" min="0" max="100" step="10" value="@Model.sunRatio[2]" readonly>
+                    </div>
+                </div>
+            </form>
         </div>
-        <button id="addScheduleBtn">Add a Needed Time</button>
-        <br><br>
-        <button id="grabScheduleFromDB">Grab Current Needed Times</button>
-        <br><br>
-        <button id="submitScheduleChanges">Submit Changes to Business Times Needed</button>
     </center>
 </div>
-@{
-    var departmentOptions = "";
-    foreach (var department in Model.AllDepts.DeptName)
-    {
-        departmentOptions += $"<option value='{department}'>{department}</option>";
-    }
-}
 
 <script>
-    function createAssignmentSet() {
-        var assignmentSet = document.createElement('div');
-        assignmentSet.classList.add('assignment-set');
-        assignmentSet.innerHTML = `
-        <center>
-        <label for="shiftPattern">Shift Pattern:</label>
-        <input type=text" placeholder="Shift Pattern">
-        <label for="shiftAmt">Shift Amt:</label>
-        <input type="number" placeholder="Shift Amt">
-        <button class="delete-btn" onclick="deleteAssignment(this)">X</button>
-        <br><br>
-        </center>
-        `;
-        document.getElementById('assignmentContainer').appendChild(assignmentSet);
-    }
+    document.getElementById("add_time").addEventListener("click", function () {
+        document.getElementById("add_time").style.display = 'none';
+        document.getElementById("edit_time").style.display = 'block';
+    });
+</script>
 
-    // Function to create a new set of text boxes
-    function createScheduleSet() {
-        // Create elements
-        var scheduleSet = document.createElement('div');
-        scheduleSet.classList.add('schedule-set');
-        scheduleSet.innerHTML = `
-                    <center>
-                    <label for="weekId">Week ID:</label>
-                    <input type="text" placeholder="Week ID">
-                    <label for="department">Department:</label>
-                    <select id = "department">@Html.Raw(departmentOptions)</select>
-                    <label for="dayOfWeek">Day of the Week:</label>
-                    <select id = "dayOfWeek">
-                        <option value="Monday">Monday</option>
-                        <option value="Tuesday">Tuesday</option>
-                        <option value="Wednesday">Wednesday</option>
-                        <option value="Thursday">Thursday</option>
-                        <option value="Friday">Friday</option>
-                        <option value="Saturday">Saturday</option>
-                        <option value="Sunday">Sunday</option>
-                    </select>
-                    <br>
-                    <label for "startHour">Start Time</label>
-                    <select id="startHour">
-                        ${generateHoursOptions()}
-                    </select>
-                    <select id="startMinute">
-                        ${generate30MinuteOptions()}
-                    </select>
-                    <label for "endHour">End Time</label>
-                    <select id="endHour">
-                        ${generateHoursOptions()}
-                    </select>
-                    <select id="endMinute">
-                        ${generate30MinuteOptions()}
-                    </select>
-                    <input type="number" placeholder="Freqency Ratio">
-                    <button class="delete-btn" onclick="deleteSchedule(this)">X</button>
-                    <br><br>
-                    </center>
-                `;
-        // Append to container
-        document.getElementById('scheduleContainer').appendChild(scheduleSet);
-    }
+<script>
+    // SCRIPT FOR WEEKS SLIDERS
+    // Get references to the sliders
+    var slider1 = document.getElementById("slider1");
+    var slider2 = document.getElementById("slider2");
+    var slider3 = document.getElementById("slider3");
+    var slider4 = document.getElementById("slider4");
 
-    // Function to generate options for hours (24-hour format)
-    function generateHoursOptions() {
-        var options = '';
-        for (var hour = 0; hour < 24; hour++) {
-            options += `<option value="${hour}">${hour}</option>`;
+    var valueText1 = document.getElementById("valueText1");
+    var valueText2 = document.getElementById("valueText2");
+    var valueText3 = document.getElementById("valueText3");
+    var valueText4 = document.getElementById("valueText4");
+
+    // Add event listeners to both sliders
+    slider1.addEventListener("input", function () {
+
+        var max2 = 100 - slider1.value;
+        if (slider2.value > max2) {
+            slider2.value = max2;
         }
-        return options;
-    }
 
-    // Function to generate options for minutes (30-minute intervals)
-    function generate30MinuteOptions() {
-        var options = '';
-        for (var minute = 0; minute < 60; minute += 30) {
-            options += `<option value="${minute}">${('0' + minute).slice(-2)}</option>`;
+        var max3 = 100 - slider1.value - slider2.value;
+        if (slider3.value > max3) {
+            slider3.value = max3;
         }
-        return options;
-    }
 
-    // Function to delete schedule set
-    function deleteSchedule(element) {
-        var scheduleSet = element.parentNode;
-        scheduleSet.parentNode.removeChild(scheduleSet);
-    }
-    function deleteAssignment(element) {
-        var assignmentSet = element.parentNode;
-        assignmentSet.parentNode.removeChild(assignmentSet);
-    }
+        slider4.value = 100 - slider1.value - slider2.value - slider3.value;
 
-    // Add event listener to the button for creating schedules
-    document.getElementById('addScheduleBtn').addEventListener('click', function () {
-        createScheduleSet();
+        valueText1.textContent = "Pattern 1: " + slider1.value + "%";
+        valueText2.textContent = "Pattern 2: " + slider2.value + "%";
+        valueText3.textContent = "Pattern 3: " + slider3.value + "%";
+        valueText4.textContent = "Pattern 4: " + slider4.value + "%";
+
     });
 
-    // Add event listener to the button for adding assignment blocks
-    document.getElementById('addAssignmentBtn').addEventListener('click', function () {
-        createAssignmentSet();
+    slider2.addEventListener("input", function () {
+
+        var max2 = 100 - slider1.value;
+        if (slider2.value > max2) {
+            slider2.value = max2;
+        }
+
+        var max3 = 100 - slider1.value - slider2.value;
+        if (slider3.value > max3) {
+            slider3.value = max3;
+        }
+
+        slider4.value = 100 - slider1.value - slider2.value - slider3.value;
+
+        valueText1.textContent = "Pattern 1: " + slider1.value + "%";
+        valueText2.textContent = "Pattern 2: " + slider2.value + "%";
+        valueText3.textContent = "Pattern 3: " + slider3.value + "%";
+        valueText4.textContent = "Pattern 4: " + slider4.value + "%";
+
     });
+
+    slider3.addEventListener("input", function () {
+
+        var max3 = 100 - slider1.value - slider2.value;
+        if (slider3.value > max3) {
+            slider3.value = max3;
+        }
+
+        slider4.value = 100 - slider1.value - slider2.value - slider3.value;
+
+        valueText1.textContent = "Pattern 1: " + slider1.value + "%";
+        valueText2.textContent = "Pattern 2: " + slider2.value + "%";
+        valueText3.textContent = "Pattern 3: " + slider3.value + "%";
+        valueText4.textContent = "Pattern 4: " + slider4.value + "%";
+
+    });
+
+    slider4.addEventListener("input", function () {
+
+        var set4 = 100 - slider1.value - slider2.value - slider3.value;
+        if (slider4.value != set4) {
+            slider4.value = set4;
+        }
+
+        // slider4.value = 100 - slider1.value - slider2.value - slider3.value;
+
+        valueText1.textContent = "Pattern 1: " + slider1.value + "%";
+        valueText2.textContent = "Pattern 2: " + slider2.value + "%";
+        valueText3.textContent = "Pattern 3: " + slider3.value + "%";
+        valueText4.textContent = "Pattern 4: " + slider4.value + "%";
+
+    });
+
+</script>
+
+<script>
+    // SCRIPT FOR MONDAY SLIDERS
+    // Get references to the sliders
+    let ratio1 = document.getElementById("mon_slider1");
+    let ratio2 = document.getElementById("mon_slider2");
+    let ratio3 = document.getElementById("mon_slider3");
+
+    let Text1 = document.getElementById("mon_valueText1");
+    let Text2 = document.getElementById("mon_valueText2");
+    let Text3 = document.getElementById("mon_valueText3");
+
+    // Add event listeners to both sliders
+    ratio1.addEventListener("input", function () {
+
+        let maxr2 = 100 - ratio1.value;
+        if (ratio2.value > maxr2) {
+            ratio2.value = maxr2;
+        }
+
+        ratio3.value = 100 - ratio1.value - ratio2.value;
+
+        Text1.textContent = "Time1: " + ratio1.value + "%";
+        Text2.textContent = "Time2: " + ratio2.value + "%";
+        Text3.textContent = "Time3: " + ratio3.value + "%";
+
+    });
+
+    ratio2.addEventListener("input", function () {
+
+        let maxr2 = 100 - ratio1.value;
+        if (ratio2.value > maxr2) {
+            ratio2.value = maxr2;
+        }
+
+        ratio3.value = 100 - ratio1.value - ratio2.value;
+
+        Text1.textContent = "Time1: " + ratio1.value + "%";
+        Text2.textContent = "Time2: " + ratio2.value + "%";
+        Text3.textContent = "Time3: " + ratio3.value + "%";
+
+    });
+
+    ratio3.addEventListener("input", function () {
+
+        let maxr3 = 100 - ratio1.value - ratio2.value;
+        if (ratio3.value != maxr3) {
+            ratio3.value = maxr3;
+        }
+
+        ratio3.value = 100 - ratio1.value - ratio2.value;
+
+        Text1.textContent = "Time1: " + ratio1.value + "%";
+        Text2.textContent = "Time2: " + ratio2.value + "%";
+        Text3.textContent = "Time3: " + ratio3.value + "%";
+
+    });
+
+</script>
+
+<script>
+    // SCRIPT FOR TUESDAY SLIDERS
+    // Get references to the sliders
+    let tue_ratio1 = document.getElementById("tue_slider1");
+    let tue_ratio2 = document.getElementById("tue_slider2");
+    let tue_ratio3 = document.getElementById("tue_slider3");
+
+    let tue_Text1 = document.getElementById("tue_valueText1");
+    let tue_Text2 = document.getElementById("tue_valueText2");
+    let tue_Text3 = document.getElementById("tue_valueText3");
+
+    // Add event listeners to both sliders
+    tue_ratio1.addEventListener("input", function () {
+
+        let tue_maxr2 = 100 - tue_ratio1.value;
+        if (tue_ratio2.value > tue_maxr2) {
+            tue_ratio2.value = tue_maxr2;
+        }
+
+        tue_ratio3.value = 100 - tue_ratio1.value - tue_ratio2.value;
+
+        tue_Text1.textContent = "Time1: " + tue_ratio1.value + "%";
+        tue_Text2.textContent = "Time2: " + tue_ratio2.value + "%";
+        tue_Text3.textContent = "Time3: " + tue_ratio3.value + "%";
+
+    });
+
+    tue_ratio2.addEventListener("input", function () {
+
+        let tue_maxr2 = 100 - tue_ratio1.value;
+        if (tue_ratio2.value > tue_maxr2) {
+            tue_ratio2.value = tue_maxr2;
+        }
+
+        tue_ratio3.value = 100 - tue_ratio1.value - tue_ratio2.value;
+
+        tue_Text1.textContent = "Time1: " + tue_ratio1.value + "%";
+        tue_Text2.textContent = "Time2: " + tue_ratio2.value + "%";
+        tue_Text3.textContent = "Time3: " + tue_ratio3.value + "%";
+
+    });
+
+    tue_ratio3.addEventListener("input", function () {
+
+        let tue_maxr3 = 100 - tue_ratio1.value - tue_ratio2.value;
+        if (tue_ratio3.value != tue_maxr3) {
+            tue_ratio3.value = tue_maxr3;
+        }
+
+        tue_ratio3.value = 100 - tue_ratio1.value - tue_ratio2.value;
+
+        tue_Text1.textContent = "Time1: " + tue_ratio1.value + "%";
+        tue_Text2.textContent = "Time2: " + tue_ratio2.value + "%";
+        tue_Text3.textContent = "Time3: " + tue_ratio3.value + "%";
+
+    });
+
+</script>
+
+<script>
+    // SCRIPT FOR WEDNESDAY SLIDERS
+    // Get references to the sliders
+    let wed_ratio1 = document.getElementById("wed_slider1");
+    let wed_ratio2 = document.getElementById("wed_slider2");
+    let wed_ratio3 = document.getElementById("wed_slider3");
+
+    let wed_Text1 = document.getElementById("wed_valueText1");
+    let wed_Text2 = document.getElementById("wed_valueText2");
+    let wed_Text3 = document.getElementById("wed_valueText3");
+
+    // Add event listeners to both sliders
+    wed_ratio1.addEventListener("input", function () {
+
+        let wed_maxr2 = 100 - wed_ratio1.value;
+        if (wed_ratio2.value > wed_maxr2) {
+            wed_ratio2.value = wed_maxr2;
+        }
+
+        wed_ratio3.value = 100 - wed_ratio1.value - wed_ratio2.value;
+
+        wed_Text1.textContent = "Time1: " + wed_ratio1.value + "%";
+        wed_Text2.textContent = "Time2: " + wed_ratio2.value + "%";
+        wed_Text3.textContent = "Time3: " + wed_ratio3.value + "%";
+
+    });
+
+    wed_ratio2.addEventListener("input", function () {
+
+        let wed_maxr2 = 100 - wed_ratio1.value;
+        if (wed_ratio2.value > wed_maxr2) {
+            wed_ratio2.value = wed_maxr2;
+        }
+
+        wed_ratio3.value = 100 - wed_ratio1.value - wed_ratio2.value;
+
+        wed_Text1.textContent = "Time1: " + wed_ratio1.value + "%";
+        wed_Text2.textContent = "Time2: " + wed_ratio2.value + "%";
+        wed_Text3.textContent = "Time3: " + wed_ratio3.value + "%";
+
+    });
+
+    wed_ratio3.addEventListener("input", function () {
+
+        let wed_maxr3 = 100 - wed_ratio1.value - wed_ratio2.value;
+        if (wed_ratio3.value != wed_maxr3) {
+            wed_ratio3.value = wed_maxr3;
+        }
+
+        wed_ratio3.value = 100 - wed_ratio1.value - wed_ratio2.value;
+
+        wed_Text1.textContent = "Time1: " + wed_ratio1.value + "%";
+        wed_Text2.textContent = "Time2: " + wed_ratio2.value + "%";
+        wed_Text3.textContent = "Time3: " + wed_ratio3.value + "%";
+
+    });
+
+</script>
+
+<script>
+    // SCRIPT FOR THURSDAY SLIDERS
+    // Get references to the sliders
+    let thu_ratio1 = document.getElementById("thu_slider1");
+    let thu_ratio2 = document.getElementById("thu_slider2");
+    let thu_ratio3 = document.getElementById("thu_slider3");
+
+    let thu_Text1 = document.getElementById("thu_valueText1");
+    let thu_Text2 = document.getElementById("thu_valueText2");
+    let thu_Text3 = document.getElementById("thu_valueText3");
+
+    // Add event listeners to both sliders
+    thu_ratio1.addEventListener("input", function () {
+
+        let thu_maxr2 = 100 - thu_ratio1.value;
+        if (thu_ratio2.value > thu_maxr2) {
+            thu_ratio2.value = thu_maxr2;
+        }
+
+        thu_ratio3.value = 100 - thu_ratio1.value - thu_ratio2.value;
+
+        thu_Text1.textContent = "Time1: " + thu_ratio1.value + "%";
+        thu_Text2.textContent = "Time2: " + thu_ratio2.value + "%";
+        thu_Text3.textContent = "Time3: " + thu_ratio3.value + "%";
+
+    });
+
+    thu_ratio2.addEventListener("input", function () {
+
+        let thu_maxr2 = 100 - thu_ratio1.value;
+        if (thu_ratio2.value > thu_maxr2) {
+            thu_ratio2.value = thu_maxr2;
+        }
+
+        thu_ratio3.value = 100 - thu_ratio1.value - thu_ratio2.value;
+
+        thu_Text1.textContent = "Time1: " + thu_ratio1.value + "%";
+        thu_Text2.textContent = "Time2: " + thu_ratio2.value + "%";
+        thu_Text3.textContent = "Time3: " + thu_ratio3.value + "%";
+
+    });
+
+    thu_ratio3.addEventListener("input", function () {
+
+        let thu_maxr3 = 100 - thu_ratio1.value - thu_ratio2.value;
+        if (thu_ratio3.value != thu_maxr3) {
+            thu_ratio3.value = thu_maxr3;
+        }
+
+        thu_ratio3.value = 100 - thu_ratio1.value - thu_ratio2.value;
+
+        thu_Text1.textContent = "Time1: " + thu_ratio1.value + "%";
+        thu_Text2.textContent = "Time2: " + thu_ratio2.value + "%";
+        thu_Text3.textContent = "Time3: " + thu_ratio3.value + "%";
+
+    });
+
+</script>
+
+<script>
+    // SCRIPT FOR FRIDAY SLIDERS
+    // Get references to the sliders
+    let fri_ratio1 = document.getElementById("fri_slider1");
+    let fri_ratio2 = document.getElementById("fri_slider2");
+    let fri_ratio3 = document.getElementById("fri_slider3");
+
+    let fri_Text1 = document.getElementById("fri_valueText1");
+    let fri_Text2 = document.getElementById("fri_valueText2");
+    let fri_Text3 = document.getElementById("fri_valueText3");
+
+    // Add event listeners to both sliders
+    fri_ratio1.addEventListener("input", function () {
+
+        let fri_maxr2 = 100 - fri_ratio1.value;
+        if (fri_ratio2.value > fri_maxr2) {
+            fri_ratio2.value = fri_maxr2;
+        }
+
+        fri_ratio3.value = 100 - fri_ratio1.value - fri_ratio2.value;
+
+        fri_Text1.textContent = "Time1: " + fri_ratio1.value + "%";
+        fri_Text2.textContent = "Time2: " + fri_ratio2.value + "%";
+        fri_Text3.textContent = "Time3: " + fri_ratio3.value + "%";
+
+    });
+
+    fri_ratio2.addEventListener("input", function () {
+
+        let fri_maxr2 = 100 - fri_ratio1.value;
+        if (fri_ratio2.value > fri_maxr2) {
+            fri_ratio2.value = fri_maxr2;
+        }
+
+        fri_ratio3.value = 100 - fri_ratio1.value - fri_ratio2.value;
+
+        fri_Text1.textContent = "Time1: " + fri_ratio1.value + "%";
+        fri_Text2.textContent = "Time2: " + fri_ratio2.value + "%";
+        fri_Text3.textContent = "Time3: " + fri_ratio3.value + "%";
+
+    });
+
+    fri_ratio3.addEventListener("input", function () {
+
+        let fri_maxr3 = 100 - fri_ratio1.value - fri_ratio2.value;
+        if (fri_ratio3.value != fri_maxr3) {
+            fri_ratio3.value = fri_maxr3;
+        }
+
+        fri_ratio3.value = 100 - fri_ratio1.value - fri_ratio2.value;
+
+        fri_Text1.textContent = "Time1: " + fri_ratio1.value + "%";
+        fri_Text2.textContent = "Time2: " + fri_ratio2.value + "%";
+        fri_Text3.textContent = "Time3: " + fri_ratio3.value + "%";
+
+    });
+
+</script>
+
+<script>
+    // SCRIPT FOR SATURDAY SLIDERS
+    // Get references to the sliders
+    let sat_ratio1 = document.getElementById("sat_slider1");
+    let sat_ratio2 = document.getElementById("sat_slider2");
+    let sat_ratio3 = document.getElementById("sat_slider3");
+
+    let sat_Text1 = document.getElementById("sat_valueText1");
+    let sat_Text2 = document.getElementById("sat_valueText2");
+    let sat_Text3 = document.getElementById("sat_valueText3");
+
+    // Add event listeners to both sliders
+    sat_ratio1.addEventListener("input", function () {
+
+        let sat_maxr2 = 100 - sat_ratio1.value;
+        if (sat_ratio2.value > sat_maxr2) {
+            sat_ratio2.value = sat_maxr2;
+        }
+
+        sat_ratio3.value = 100 - sat_ratio1.value - sat_ratio2.value;
+
+        sat_Text1.textContent = "Time1: " + sat_ratio1.value + "%";
+        sat_Text2.textContent = "Time2: " + sat_ratio2.value + "%";
+        sat_Text3.textContent = "Time3: " + sat_ratio3.value + "%";
+
+    });
+
+    sat_ratio2.addEventListener("input", function () {
+
+        let sat_maxr2 = 100 - sat_ratio1.value;
+        if (sat_ratio2.value > sat_maxr2) {
+            sat_ratio2.value = sat_maxr2;
+        }
+
+        sat_ratio3.value = 100 - sat_ratio1.value - sat_ratio2.value;
+
+        sat_Text1.textContent = "Time1: " + sat_ratio1.value + "%";
+        sat_Text2.textContent = "Time2: " + sat_ratio2.value + "%";
+        sat_Text3.textContent = "Time3: " + sat_ratio3.value + "%";
+
+    });
+
+    sat_ratio3.addEventListener("input", function () {
+
+        let sat_maxr3 = 100 - sat_ratio1.value - sat_ratio2.value;
+        if (sat_ratio3.value != sat_maxr3) {
+            sat_ratio3.value = sat_maxr3;
+        }
+
+        sat_ratio3.value = 100 - sat_ratio1.value - sat_ratio2.value;
+
+        sat_Text1.textContent = "Time1: " + sat_ratio1.value + "%";
+        sat_Text2.textContent = "Time2: " + sat_ratio2.value + "%";
+        sat_Text3.textContent = "Time3: " + sat_ratio3.value + "%";
+
+    });
+
+</script>
+
+<script>
+    // SCRIPT FOR SUNDAY SLIDERS
+    // Get references to the sliders
+    let sun_ratio1 = document.getElementById("sun_slider1");
+    let sun_ratio2 = document.getElementById("sun_slider2");
+    let sun_ratio3 = document.getElementById("sun_slider3");
+
+    let sun_Text1 = document.getElementById("sun_valueText1");
+    let sun_Text2 = document.getElementById("sun_valueText2");
+    let sun_Text3 = document.getElementById("sun_valueText3");
+
+    // Add event listeners to both sliders
+    sun_ratio1.addEventListener("input", function () {
+
+        let sun_maxr2 = 100 - sun_ratio1.value;
+        if (sun_ratio2.value > sun_maxr2) {
+            sun_ratio2.value = sun_maxr2;
+        }
+
+        sun_ratio3.value = 100 - sun_ratio1.value - sun_ratio2.value;
+
+        sun_Text1.textContent = "Time1: " + sun_ratio1.value + "%";
+        sun_Text2.textContent = "Time2: " + sun_ratio2.value + "%";
+        sun_Text3.textContent = "Time3: " + sun_ratio3.value + "%";
+
+    });
+
+    sun_ratio2.addEventListener("input", function () {
+
+        let sun_maxr2 = 100 - sun_ratio1.value;
+        if (sun_ratio2.value > sun_maxr2) {
+            sun_ratio2.value = sun_maxr2;
+        }
+
+        sun_ratio3.value = 100 - sun_ratio1.value - sun_ratio2.value;
+
+        sun_Text1.textContent = "Time1: " + sun_ratio1.value + "%";
+        sun_Text2.textContent = "Time2: " + sun_ratio2.value + "%";
+        sun_Text3.textContent = "Time3: " + sun_ratio3.value + "%";
+
+    });
+
+    sun_ratio3.addEventListener("input", function () {
+
+        let sun_maxr3 = 100 - sun_ratio1.value - sun_ratio2.value;
+        if (sun_ratio3.value != sun_maxr3) {
+            sun_ratio3.value = sun_maxr3;
+        }
+
+        sun_ratio3.value = 100 - sun_ratio1.value - sun_ratio2.value;
+
+        sun_Text1.textContent = "Time1: " + sun_ratio1.value + "%";
+        sun_Text2.textContent = "Time2: " + sun_ratio2.value + "%";
+        sun_Text3.textContent = "Time3: " + sun_ratio3.value + "%";
+
+    });
+
 </script>

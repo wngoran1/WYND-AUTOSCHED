@@ -20,6 +20,7 @@ namespace Automatic_Scheduling_App.Pages
         private MySqlConnection database { get; set; }
         private int user_id;
         public string manager { get; set; }
+        public string userValid { get; set; }
         public string userpass { get; set; }
         public string useradd { get; set; }
         public string signin { get; set; }
@@ -38,6 +39,7 @@ namespace Automatic_Scheduling_App.Pages
             useradd = "none";
             userpass = "block";
             manager = "none";
+            userValid = "none";
             signin = "LogIn";
 
             userData = new Dictionary<string, string>

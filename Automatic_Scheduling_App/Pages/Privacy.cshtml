@@ -29,3 +29,62 @@
 </p>
 
 
+<script>
+    // Get references to the sliders
+    var slider1 = document.getElementById("slider1");
+    var slider2 = document.getElementById("slider2");
+    var slider3 = document.getElementById("slider3");
+    var slider4 = document.getElementById("slider4");
+
+    var valueText1 = document.getElementById("valueText1");
+    var valueText2 = document.getElementById("valueText2");
+    var valueText3 = document.getElementById("valueText3");
+    var valueText4 = document.getElementById("valueText4");
+
+    var sumall = document.getElementById("sumall");
+
+    // Add event listeners to both sliders
+    slider1.addEventListener("input", function () {
+
+        slider2.max = 100 - slider1.value;
+        slider3.max = 100 - slider1.value - slider2.value;
+        slider4.value = 100 - slider1.value - slider2.value - slider3.value;
+
+        valueText1.textContent = "Slider 1: " + slider1.value;
+        valueText2.textContent = "Slider 2: " + slider2.value;
+        valueText3.textContent = "Slider 3: " + slider3.value;
+        valueText4.textContent = "Slider 4: " + slider4.value;
+
+        var sum = parseInt(slider1.value) + parseInt(slider2.value) + parseInt(slider3.value) + parseInt(slider4.value);
+        sumall.textContent = "Total: " + sum;
+    });
+
+    slider2.addEventListener("input", function () {
+
+        slider3.max = 100 - slider1.value - slider2.value;
+        slider4.value = 100 - slider1.value - slider2.value - slider3.value;
+
+        valueText1.textContent = "Slider 1: " + slider1.value;
+        valueText2.textContent = "Slider 2: " + slider2.value;
+        valueText3.textContent = "Slider 3: " + slider3.value;
+        valueText4.textContent = "Slider 4: " + slider4.value;
+
+        var sum = parseInt(slider1.value) + parseInt(slider2.value) + parseInt(slider3.value) + parseInt(slider4.value);
+        sumall.textContent = "Total: " + sum;
+    });
+
+    slider3.addEventListener("input", function () {
+
+        slider4.value = 100 - slider1.value - slider2.value - slider3.value;
+
+        valueText1.textContent = "Slider 1: " + slider1.value;
+        valueText2.textContent = "Slider 2: " + slider2.value;
+        valueText3.textContent = "Slider 3: " + slider3.value;
+        valueText4.textContent = "Slider 4: " + slider4.value;
+
+        var sum = parseInt(slider1.value) + parseInt(slider2.value) + parseInt(slider3.value) + parseInt(slider4.value);
+        sumall.textContent = "Total: " + sum;
+    });
+
+</script>
+

@@ -281,12 +281,20 @@
       "PackagePath": "staticwebassets\\rect.png"
     },
     {
+      "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\refresh.svg",
+      "PackagePath": "staticwebassets\\refresh.svg"
+    },
+    {
       "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\reload.svg",
       "PackagePath": "staticwebassets\\reload.svg"
     },
     {
       "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\sched.svg",
       "PackagePath": "staticwebassets\\sched.svg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\schreset.svg",
+      "PackagePath": "staticwebassets\\schreset.svg"
     },
     {
       "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\userdisplay.svg",

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "A8Wpvrwse060id5Kg1OumWToOOWHq5y/4+kkXS5M/9E=",
+  "Hash": "e3Vqiq2blke1c4L8iTvq9JL3ZYs1RKRoeV8WzSA+Phs=",
   "Source": "Automatic_Scheduling_App",
   "BasePath": "_content/Automatic_Scheduling_App",
   "Mode": "Default",
@@ -1366,6 +1366,25 @@
       "OriginalItemSpec": "wwwroot\\rect.png"
     },
     {
+      "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\refresh.svg",
+      "SourceId": "Automatic_Scheduling_App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\",
+      "BasePath": "_content/Automatic_Scheduling_App",
+      "RelativePath": "refresh.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\refresh.svg"
+    },
+    {
       "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\reload.svg",
       "SourceId": "Automatic_Scheduling_App",
       "SourceType": "Discovered",
@@ -1402,6 +1421,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\sched.svg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\schreset.svg",
+      "SourceId": "Automatic_Scheduling_App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\",
+      "BasePath": "_content/Automatic_Scheduling_App",
+      "RelativePath": "schreset.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\schreset.svg"
     },
     {
       "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\userdisplay.svg",

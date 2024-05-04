@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LK+pWAx+tx/ijJu08/T57/ulQQNB5lbYJQeY6voWQJU=",
+  "Hash": "SpnUnngXnyUuOfmNxpWi+Ey3iyevPu4jsT006aUilsk=",
   "Source": "Automatic_Scheduling_App",
   "BasePath": "_content/Automatic_Scheduling_App",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Automatic_Scheduling_App.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\addtime.svg",
+      "SourceId": "Automatic_Scheduling_App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\",
+      "BasePath": "_content/Automatic_Scheduling_App",
+      "RelativePath": "addtime.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\addtime.svg"
     },
     {
       "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\adduser.svg",
@@ -131,6 +150,25 @@
       "OriginalItemSpec": "wwwroot\\backgr3.gif"
     },
     {
+      "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\bcal.svg",
+      "SourceId": "Automatic_Scheduling_App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\",
+      "BasePath": "_content/Automatic_Scheduling_App",
+      "RelativePath": "bcal.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\bcal.svg"
+    },
+    {
       "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\bellicon.png",
       "SourceId": "Automatic_Scheduling_App",
       "SourceType": "Discovered",
@@ -148,6 +186,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\bellicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\config.svg",
+      "SourceId": "Automatic_Scheduling_App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\",
+      "BasePath": "_content/Automatic_Scheduling_App",
+      "RelativePath": "config.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\config.svg"
     },
     {
       "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\css\\site.css",
@@ -205,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\lcal.svg",
+      "SourceId": "Automatic_Scheduling_App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\",
+      "BasePath": "_content/Automatic_Scheduling_App",
+      "RelativePath": "lcal.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lcal.svg"
     },
     {
       "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

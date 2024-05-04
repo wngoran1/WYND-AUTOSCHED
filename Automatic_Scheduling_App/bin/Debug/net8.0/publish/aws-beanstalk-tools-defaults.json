@@ -1,0 +1,20 @@
+
+{
+    "region" : "us-east-2",
+    "configuration" : "Debug",
+    "framework"     : "net8.0",
+    "self-contained" : true,
+    "application"    : "autosched",
+    "environment"    : "autosched-dev",
+    "enable-xray"    : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "\"aws:autoscaling:launchconfiguration,SecurityGroups\"=\"sg-0fc2e6c0e5b2d81bf,sg-022b2f8f7f22fb3d3\";\"aws:ec2:vpc,Subnets\"=\"subnet-016ee776e7b4b20fb\"",
+    "solution-stack"       : "64bit Amazon Linux 2 v2.7.1 running .NET Core",
+    "environment-type"     : "SingleInstance",
+    "cname"                : "autosched-dev",
+    "instance-type"        : "t3a.medium",
+    "key-pair"             : "",
+    "instance-profile"     : "aws-elasticbeanstalk-ec2-role",
+    "service-role"         : "aws-elasticbeanstalk-service-role",
+    "proxy-server"         : "nginx"
+}

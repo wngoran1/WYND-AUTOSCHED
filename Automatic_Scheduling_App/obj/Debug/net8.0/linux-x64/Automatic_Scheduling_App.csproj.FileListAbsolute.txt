@@ -354,3 +354,4 @@ C:\Users\user\Documents\GitHub\WYND-AUTOSCHED\Automatic_Scheduling_App\obj\Debug
 C:\Users\user\Documents\GitHub\WYND-AUTOSCHED\Automatic_Scheduling_App\obj\Debug\net8.0\linux-x64\Automatic_Scheduling_App.pdb
 C:\Users\user\Documents\GitHub\WYND-AUTOSCHED\Automatic_Scheduling_App\obj\Debug\net8.0\linux-x64\Automatic_Scheduling_App.genruntimeconfig.cache
 C:\Users\user\Documents\GitHub\WYND-AUTOSCHED\Automatic_Scheduling_App\obj\Debug\net8.0\linux-x64\ref\Automatic_Scheduling_App.dll
+C:\Users\user\Documents\GitHub\WYND-AUTOSCHED\Automatic_Scheduling_App\bin\Debug\net8.0\linux-x64\aws-beanstalk-tools-defaults.json
