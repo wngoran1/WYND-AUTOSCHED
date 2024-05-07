@@ -1,6 +1,9 @@
 drop table if exists assignment;
 drop table if exists daily_business_need;
 drop table if exists weekly_business_need;
+drop table if exists signupcode;
+drop table if exists credentials;
+drop table if exists time_off_request;
 drop table if exists staff;
 drop table if exists department;
 drop table if exists schedule_type;

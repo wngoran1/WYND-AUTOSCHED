@@ -67,6 +67,39 @@ CREATE TABLE IF NOT EXISTS staff(
     primary key (user_id)
 );
 
+CREATE TABLE IF NOT EXISTS time_off_request(
+	user_id			int,
+    dayoff			date,
+    reason			tinytext,
+    subdate			date,
+    apprv			int default 0,
+    foreign key	(user_id) references staff(user_id)
+		on delete cascade,
+    primary key (user_id, dayoff)
+);
+
+
+CREATE TABLE IF NOT EXISTS credentials(
+	email			varchar(64),
+	pswd			varchar(12),
+    -- set to true for managers
+    clear			int default 0,
+    foreign key (email) references staff(email)
+		on update cascade on delete cascade,
+    primary key (email)
+);
+
+CREATE TABLE IF NOT EXISTS signupcode(
+	user_id			int,
+    email			varchar(64),
+    code_id			varchar(10),
+    foreign key (user_id) references staff(user_id)
+		on delete cascade,
+    foreign key (email) references staff(email)
+		on delete cascade,
+    primary key (user_id)
+);
+
 -- this relation links each department with a weekly shift pattern
 -- and indicated how many shifts are needed
 -- multiple shift patterns can be linked to a department

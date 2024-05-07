@@ -239,10 +239,10 @@ namespace Automatic_Scheduling_App.Pages
             {
                 // make all the assignments
                 AssignmentCreator newAssignment = new AssignmentCreator(db_config);
-                newAssignment.AutoScheduler(week_name, mon_w1);
-                newAssignment.AutoScheduler(week_name, mon_w2);
-                newAssignment.AutoScheduler(week_name, mon_w3);
-                newAssignment.AutoScheduler(week_name, mon_w4);
+                newAssignment.AutoScheduler(weeks[0], mon_w1);
+                newAssignment.AutoScheduler(weeks[1], mon_w2);
+                newAssignment.AutoScheduler(weeks[2], mon_w3);
+                newAssignment.AutoScheduler(weeks[3], mon_w4);
 
                 message = "###  New schedules have been generated  ###";
             }

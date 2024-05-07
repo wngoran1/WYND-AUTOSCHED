@@ -313,6 +313,10 @@
       "PackagePath": "staticwebassets\\schreset.svg"
     },
     {
+      "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\timeoff.svg",
+      "PackagePath": "staticwebassets\\timeoff.svg"
+    },
+    {
       "Id": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\userdisplay.svg",
       "PackagePath": "staticwebassets\\userdisplay.svg"
     },

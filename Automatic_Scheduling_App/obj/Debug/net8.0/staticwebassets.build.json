@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SpnUnngXnyUuOfmNxpWi+Ey3iyevPu4jsT006aUilsk=",
+  "Hash": "yRf/qUnMub8Nq/1e5FOCM94Lb2S99rAQKLJ2U2wJ2UI=",
   "Source": "Automatic_Scheduling_App",
   "BasePath": "_content/Automatic_Scheduling_App",
   "Mode": "Default",
@@ -1516,6 +1516,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\schreset.svg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\timeoff.svg",
+      "SourceId": "Automatic_Scheduling_App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\",
+      "BasePath": "_content/Automatic_Scheduling_App",
+      "RelativePath": "timeoff.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\timeoff.svg"
     },
     {
       "Identity": "C:\\Users\\user\\Documents\\GitHub\\WYND-AUTOSCHED\\Automatic_Scheduling_App\\wwwroot\\userdisplay.svg",
