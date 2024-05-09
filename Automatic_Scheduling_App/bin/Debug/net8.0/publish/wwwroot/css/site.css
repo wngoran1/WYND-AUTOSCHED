@@ -162,6 +162,81 @@ body {
     font-size: 20px; /* Change the font size for page 2 */
 }
 
+.weeklistdisplay {
+    //font-family: "Century Schoolbook" font-weight: bold; /* Set font weight to bold */
+    font-family: 'Courier New';
+    font-weight: bold;
+    font-size: 17px; /* Change the font size for page 2 */
+    background-color:forestgreen; /* Set background color to light gray */
+    border: 2px solid black; /* Add a border */
+    border-radius: 10px; /* Add border radius */
+    box-shadow: 2px 2px 5px gray; /* Add a shadow */
+}
+
+    .weeklistdisplay table {
+        //font-family: "Century Schoolbook" font-weight: bold; /* Set font weight to bold */
+        font-family: Arial;
+        font-weight: bold;
+        font-size: 17px; /* Change the font size for page 2 */
+        border: 2px solid black; /* Add a border */
+        border-radius: 10px; /* Add border radius */
+        box-shadow: 2px 2px 5px gray; /* Add a shadow */
+    }
+
+#primone {
+    background-color: lightyellow;
+}
+
+#primtwo {
+    background-color:lightcyan;
+}
+
+
+    .weeklistdisplay table.scrolldown {
+        width: 100%;
+        /* border-collapse: collapse; */
+        border-spacing: 0;
+        border: 2px solid black;
+    }
+
+    /* To display the block as level element */
+    .weeklistdisplay table.scrolldown tbody, table.scrolldown thead {
+        display: block;
+    }
+
+    .weeklistdisplay thead tr th {
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .weeklistdisplay table.scrolldown tbody {
+        /* Set the height of table body */
+        height: 25rem;
+        /* Set vertical scroll */
+        overflow-y: auto;
+        /* Hide the horizontal scroll */
+        overflow-x: hidden;
+    }
+
+    .weeklistdisplay tbody {
+        border-top: 2px solid black;
+    }
+
+    .weeklistdisplay tbody td, thead th {
+        width: 200px;
+        border-right: 2px solid black;
+    }
+
+    .weeklistdisplay td {
+        text-align: center;
+    }
+
+    .weeklistdisplay h3 {
+        color: white;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+
 .empenrol {
     font-size: 20px; /* Change the font size for page 2 */
 }

@@ -6,7 +6,11 @@ select * from assignment where week_id = 1;
 select * from daily_business_need;
 select * from daily_business_need order by weekday;
 
+select * from weekframe where start_date < "2024-05-24";
+
 select * from time_off_request;
+select count(*) from time_off_request where apprv > 0 and dayoff > CURDATE();
+select count(*) from time_off_request where apprv=0 group by user_id;
 select * from weekly_business_need;
 select * from staff;
 select * from staff order by dept_id;

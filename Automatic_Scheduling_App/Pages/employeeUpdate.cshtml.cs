@@ -27,6 +27,7 @@ namespace Automatic_Scheduling_App.Pages
         public string signin { get; set; }
         public string updated { get; set; }
         public string updateFail { get; set; }
+        public int notify { get; set; }
 
         public employeeUpdateModel(ILogger<employeeUpdateModel> logger)
         {
@@ -102,6 +103,28 @@ namespace Automatic_Scheduling_App.Pages
             };
         }
 
+        private void UpdateNotify()
+        {
+            try
+            {
+                database.Open();
+                string query = "select count(*) from time_off_request " +
+                                "where user_id = @UserID and apprv > 0 and dayoff > CURDATE()";
+                MySqlCommand select = new MySqlCommand(query, database);
+                select.Parameters.AddWithValue("@UserID", user_id);
+                object result = select.ExecuteScalar();
+
+                if (result != null)
+                    notify = Convert.ToInt32(result);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                // Handle exceptions
+            }
+            finally { database.Close(); }
+        }
         private void GetUserData()
         {
             try
@@ -361,6 +384,8 @@ namespace Automatic_Scheduling_App.Pages
 
             if (manager_id > 0)
                 manager = "block";
+
+            UpdateNotify();
 
             return Page();
         }

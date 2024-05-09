@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Scheduler";
 }
+
 <br>
 <br>
 <div class="jumbotron" style="text-align:center">
@@ -70,44 +71,192 @@
 
 <br />
 <br />
-<form method="post">
-    <div class="form-row" style="background-color:orange;">
-        <button type="submit" name="reset_day" class="btn btn-outline-dark">
-            <img src="/refresh.svg" class="img-fluid" alt="..." style="width: 40px; height: auto;">
-        </button>
-        <select name="week_day" class="form-select rounded" style="background-color:orange; font-size: 30px; width:fit-content; height: auto; margin-left: 10px;">
-            <option selected>@Model.week_day</option>
-            <option value="mon">Monday</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-        </select>
-    </div>
-</form>
 
-<table id="empdisplay" class="table table-dark table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Department</th>
-            <th scope="col">Shift Start</th>
-            <th scope="col">Shift End</th>
-            <th scope="col">Employee</th>
-            <th scope="col">Role</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model.week_list)
-        {
+<div class="mb-3 weeklistdisplay">
+    <h3>MONDAY</h3>
+    <table id="primone" class="scrolldown">
+        <thead>
             <tr>
-                <td>@user.Item1</td>
-                <td>@user.Item2</td>
-                <td>@user.Item3</td>
-                <td>@user.Item4</td>
-                <td>@user.Item5</td>
+                <th scope="col">Department</th>
+                <th scope="col">Shift Start</th>
+                <th scope="col">Shift End</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Role</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.mon_list)
+            {
+                <tr>
+                    <td>@user.Item1</td>
+                    <td>@user.Item2</td>
+                    <td>@user.Item3</td>
+                    <td>@user.Item4</td>
+                    <td>@user.Item5</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mb-3 weeklistdisplay">
+    <h3>TUESDAY</h3>
+    <table id="primtwo" class="scrolldown">
+        <thead>
+            <tr>
+                <th scope="col">Department</th>
+                <th scope="col">Shift Start</th>
+                <th scope="col">Shift End</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.tue_list)
+            {
+                <tr>
+                    <td>@user.Item1</td>
+                    <td>@user.Item2</td>
+                    <td>@user.Item3</td>
+                    <td>@user.Item4</td>
+                    <td>@user.Item5</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mb-3 weeklistdisplay">
+    <h3>WEDNESDAY</h3>
+    <table id="primone" class="scrolldown">
+        <thead>
+            <tr>
+                <th scope="col">Department</th>
+                <th scope="col">Shift Start</th>
+                <th scope="col">Shift End</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.wed_list)
+            {
+                <tr>
+                    <td>@user.Item1</td>
+                    <td>@user.Item2</td>
+                    <td>@user.Item3</td>
+                    <td>@user.Item4</td>
+                    <td>@user.Item5</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mb-3 weeklistdisplay">
+    <h3>THURSDAY</h3>
+    <table id="primtwo" class="scrolldown">
+        <thead>
+            <tr>
+                <th scope="col">Department</th>
+                <th scope="col">Shift Start</th>
+                <th scope="col">Shift End</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.thu_list)
+            {
+                <tr>
+                    <td>@user.Item1</td>
+                    <td>@user.Item2</td>
+                    <td>@user.Item3</td>
+                    <td>@user.Item4</td>
+                    <td>@user.Item5</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mb-3 weeklistdisplay">
+    <h3>FRIDAY</h3>
+    <table id="primone" class="scrolldown">
+        <thead>
+            <tr>
+                <th scope="col">Department</th>
+                <th scope="col">Shift Start</th>
+                <th scope="col">Shift End</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.fri_list)
+            {
+                <tr>
+                    <td>@user.Item1</td>
+                    <td>@user.Item2</td>
+                    <td>@user.Item3</td>
+                    <td>@user.Item4</td>
+                    <td>@user.Item5</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mb-3 weeklistdisplay">
+    <h3>SATURDAY</h3>
+    <table id="primtwo" class="scrolldown">
+        <thead>
+            <tr>
+                <th scope="col">Department</th>
+                <th scope="col">Shift Start</th>
+                <th scope="col">Shift End</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.sat_list)
+            {
+                <tr>
+                    <td>@user.Item1</td>
+                    <td>@user.Item2</td>
+                    <td>@user.Item3</td>
+                    <td>@user.Item4</td>
+                    <td>@user.Item5</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mb-3 weeklistdisplay">
+    <h3>SUNDAY</h3>
+    <table id="primone" class="scrolldown">
+        <thead>
+            <tr>
+                <th scope="col">Department</th>
+                <th scope="col">Shift Start</th>
+                <th scope="col">Shift End</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.sun_list)
+            {
+                <tr>
+                    <td>@user.Item1</td>
+                    <td>@user.Item2</td>
+                    <td>@user.Item3</td>
+                    <td>@user.Item4</td>
+                    <td>@user.Item5</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

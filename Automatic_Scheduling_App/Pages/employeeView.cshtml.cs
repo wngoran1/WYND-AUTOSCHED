@@ -20,6 +20,7 @@ namespace Automatic_Scheduling_App.Pages
         private int staff_id;
         private List<int> deptEmployees;
         public List<string> departments { get; set; }
+        public int notify { get; set; }
         public int index { get; set; }
         public int range { get; set; }
         public Dictionary<string, string> userData { get; set; }
@@ -40,6 +41,28 @@ namespace Automatic_Scheduling_App.Pages
             range = 0;
         }
 
+        private void UpdateNotify()
+        {
+            try
+            {
+                database.Open();
+                string query = "select count(*) from time_off_request " +
+                                "where user_id = @UserID and apprv > 0 and dayoff > CURDATE()";
+                MySqlCommand select = new MySqlCommand(query, database);
+                select.Parameters.AddWithValue("@UserID", user_id);
+                object result = select.ExecuteScalar();
+
+                if (result != null)
+                    notify = Convert.ToInt32(result);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                // Handle exceptions
+            }
+            finally { database.Close(); }
+        }
         private void loadDepartments()
         {
             departments = []; // reset
@@ -242,6 +265,7 @@ namespace Automatic_Scheduling_App.Pages
                 user_id = 0;
             }
 
+            UpdateNotify();
             // try sent user back to index if he tries coming back here without login
             if (user_id == 0)
                 return RedirectToPage("Index");
@@ -302,6 +326,17 @@ namespace Automatic_Scheduling_App.Pages
 
         public IActionResult OnPost()
         {
+            try // verify user
+            {
+                user_id = (int)HttpContext.Session.GetInt32("user_id");
+            }
+            catch (Exception ex)
+            {
+                user_id = 0;
+            }
+
+            UpdateNotify();
+
             if (Request.Form.ContainsKey("dept_update"))
             {
                 // update session variables for department and reset index

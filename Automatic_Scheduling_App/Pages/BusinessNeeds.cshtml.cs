@@ -36,6 +36,7 @@ namespace Automatic_Scheduling_App.Pages
         public string addtime { get; set; }
         public string addtime_but { get; set; }
         public string dept_name { get; set; }
+        public int notify { get; set; }
         public int dept_id { get; set; }
 
         public List<string> weekP1 { get; set; }
@@ -123,8 +124,31 @@ namespace Automatic_Scheduling_App.Pages
             friRatio = new List<int> { 0, 0, 0 };
             satRatio = new List<int> { 0, 0, 0 };
             sunRatio = new List<int> { 0, 0, 0 };
+            
         }
 
+        private void UpdateNotify()
+        {
+            try
+            {
+                database.Open();
+                string query = "select count(*) from time_off_request " +
+                                "where user_id = @UserID and apprv > 0 and dayoff > CURDATE()";
+                MySqlCommand select = new MySqlCommand(query, database);
+                select.Parameters.AddWithValue("@UserID", user_id);
+                object result = select.ExecuteScalar();
+
+                if (result != null)
+                    notify = Convert.ToInt32(result);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                // Handle exceptions
+            }
+            finally { database.Close(); }
+        }
         private void loadDepartments()
         {
             departments = new Dictionary<int, string>();
@@ -825,6 +849,8 @@ namespace Automatic_Scheduling_App.Pages
                 user_id = 0;
             }
 
+            UpdateNotify();
+
             // try sent user back to index if he tries coming back here without login
             if (user_id == 0)
                 return RedirectToPage("Index");
@@ -836,6 +862,17 @@ namespace Automatic_Scheduling_App.Pages
 
         public IActionResult OnPost()
         {
+            try // verify user
+            {
+                user_id = (int)HttpContext.Session.GetInt32("user_id");
+            }
+            catch (Exception ex)
+            {
+                user_id = 0;
+            }
+
+            UpdateNotify();
+
             if (Request.Form.ContainsKey("dept_update"))
             {
                 dept_id = int.Parse(Request.Form["dept_id"]);

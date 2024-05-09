@@ -25,6 +25,7 @@ namespace Automatic_Scheduling_App.Pages
         public string useradd { get; set; }
         public string signin { get; set; }
         public string message { get; set; }
+        public int notify { get; set; }
         public Dictionary<string, string> stateInput { get; set; }
         public Dictionary<string, string> userData { get; set; }
 
@@ -34,6 +35,7 @@ namespace Automatic_Scheduling_App.Pages
             _logger = logger;
             database = new MySqlConnection(db_config);
             user_id = 0;
+            notify = 0;
 
             message = "";
             useradd = "none";
@@ -89,6 +91,28 @@ namespace Automatic_Scheduling_App.Pages
             };
         }
 
+        private void UpdateNotify()
+        {
+            try
+            {
+                database.Open();
+                string query = "select count(*) from time_off_request " +
+                                "where user_id = @UserID and apprv > 0 and dayoff > CURDATE()";
+                MySqlCommand select = new MySqlCommand(query, database);
+                select.Parameters.AddWithValue("@UserID", user_id);
+                object result = select.ExecuteScalar();
+
+                if (result != null)
+                    notify = Convert.ToInt32(result);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                // Handle exceptions
+            }
+            finally { database.Close(); }
+        }
         private void GetUserData()
         {
             try

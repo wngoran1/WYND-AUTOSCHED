@@ -19,8 +19,10 @@ namespace Automatic_Scheduling_App.Pages
         public string manager { get; set; }
         public string userValid { get; set; }
         public string signin { get; set; }
+        public int notify { get; set; }
         private int user_id;
         private int manager_id;
+        
 
         private int reset;
         public IndexModel(ILogger<IndexModel> logger)

@@ -21,6 +21,7 @@ namespace Automatic_Scheduling_App.Pages
         private int user_id;
         public string userValid { get; set; }
         public string signin { get; set; }
+        public int notify { get; set; }
 
         public dashboardModel(ILogger<dashboardModel> logger)
         {
@@ -31,6 +32,28 @@ namespace Automatic_Scheduling_App.Pages
             manager = "none";
         }
 
+        private void UpdateNotify()
+        {
+            try
+            {
+                database.Open();
+                string query = "select count(*) from time_off_request " +
+                                "where user_id = @UserID and apprv > 0 and dayoff > CURDATE()";
+                MySqlCommand select = new MySqlCommand(query, database);
+                select.Parameters.AddWithValue("@UserID", user_id);
+                object result = select.ExecuteScalar();
+
+                if (result != null)
+                    notify = Convert.ToInt32(result);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                // Handle exceptions
+            }
+            finally { database.Close(); }
+        }
         //User Data variables
         public string userName { get; set; }
         public string user_dept { get; set; }
@@ -267,6 +290,7 @@ namespace Automatic_Scheduling_App.Pages
                 user_id = 0;
                 manager_id = 0;
             }
+            UpdateNotify();
 
             // try sent user back to index if he tries coming back here without login
             if (user_id == 0)

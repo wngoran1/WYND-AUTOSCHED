@@ -22,8 +22,9 @@ namespace Automatic_Scheduling_App.Pages
 
         //temporary variable while debuging assignment creation
         public string message { get; set; }
-        private MySqlConnection database { get; set; }
+        private MySqlConnection database;
         public string signin { get; set; }
+        public int notify {  get; set; }
         public string manager { get; set; }
         public string userValid { get; set; }
         public string loading { get; set; }
@@ -31,11 +32,17 @@ namespace Automatic_Scheduling_App.Pages
         public string nextDis { get; set; }
         private int display_week;
         public string week_name { get; set; }
-        public string week_day { get; set; }
         private int user_id;
         public List<string> weeks { get; set; }
 
-        public List<Tuple<string, TimeSpan, TimeSpan, string, string>> week_list { get; set; }
+        public List<Tuple<string, TimeSpan, TimeSpan, string, string>> mon_list { get; set; }
+        public List<Tuple<string, TimeSpan, TimeSpan, string, string>> tue_list { get; set; }
+        public List<Tuple<string, TimeSpan, TimeSpan, string, string>> wed_list { get; set; }
+        public List<Tuple<string, TimeSpan, TimeSpan, string, string>> thu_list { get; set; }
+        public List<Tuple<string, TimeSpan, TimeSpan, string, string>> fri_list { get; set; }
+        public List<Tuple<string, TimeSpan, TimeSpan, string, string>> sat_list { get; set; }
+        public List<Tuple<string, TimeSpan, TimeSpan, string, string>> sun_list { get; set; }
+
         private int index;
         private DateOnly mon_w1;
         private DateOnly mon_w2;
@@ -56,12 +63,33 @@ namespace Automatic_Scheduling_App.Pages
             loadWeekDates();
 
             week_name = weeks[0];
-            week_day = "Unknown";
             message = "";
             prevDis = "";
             nextDis = "";
         }
 
+        private void UpdateNotify()
+        {
+            try
+            {
+                database.Open();
+                string query = "select count(*) from time_off_request " +
+                                "where user_id = @UserID and apprv > 0 and dayoff > CURDATE()";
+                MySqlCommand select = new MySqlCommand(query, database);
+                select.Parameters.AddWithValue("@UserID", user_id);
+                object result = select.ExecuteScalar();
+
+                if (result != null)
+                    notify = Convert.ToInt32(result);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                // Handle exceptions
+            }
+            finally { database.Close(); }
+        }
         private void loadWeekDates()
         {
             weeks = [];
@@ -119,7 +147,7 @@ namespace Automatic_Scheduling_App.Pages
             return week_id;
         }
 
-        public void ListByDay(int week_id, string day)
+        private void ListByDay(int week_id, string day)
         {
             List<Tuple<string, TimeSpan, TimeSpan, string, string>> assignments = [];
 
@@ -131,7 +159,7 @@ namespace Automatic_Scheduling_App.Pages
                 // SQL query to select the assignments
                 string rQuery = "select dept_name, start_time, end_time, first_name, Last_name, position " +
                         "from assignment natural inner join staff natural inner join department, timeframe " +
-                        "where assignment." + day + "_time = timeframe.timeframe_id and week_id = 3 " +
+                        "where assignment." + day + "_time = timeframe.timeframe_id and week_id = @WeekID " +
                         "and " + day + "_date is not null and ssn is not null " +
                         "order by dept_name, start_time, first_name";
 
@@ -145,10 +173,9 @@ namespace Automatic_Scheduling_App.Pages
                     // Retrieve and add the tupples to the list
                     string username = reader.GetString("first_name") + " " + reader.GetString("last_name");
                     var newData = new Tuple<string, TimeSpan, TimeSpan, string, string>(reader.GetString("dept_name"),
-                                    reader.GetTimeSpan("start_time"), reader.GetTimeSpan("end_time"), 
+                                    reader.GetTimeSpan("start_time"), reader.GetTimeSpan("end_time"),
                                     username, reader.GetString("position"));
                     assignments.Add(newData);
-
                 }
             }
             catch (Exception ex)
@@ -161,16 +188,24 @@ namespace Automatic_Scheduling_App.Pages
                 database.Close();
             }
 
-            week_list = assignments;
+            if (day == "mon") mon_list = assignments;
+            else if (day == "tue") tue_list = assignments;
+            else if (day == "wed") wed_list = assignments;
+            else if (day == "thu") thu_list = assignments;
+            else if (day == "fri") fri_list = assignments;
+            else if (day == "sat") sat_list = assignments;
+            else if (day == "sun") sun_list = assignments;
+        }
 
-            if (day == "mon") week_day = "Monday";
-            else if (day == "tue") week_day = "Tuesday";
-            else if (day == "wed") week_day = "Wednesday";
-            else if (day == "thu") week_day = "Thursday";
-            else if (day == "fri") week_day = "Friday";
-            else if (day == "sat") week_day = "Saturday";
-            else if (day == "sun") week_day = "Sunday";
-
+        private void DisplayWeek(int week_id)
+        {
+            ListByDay(week_id, "mon");
+            ListByDay(week_id, "tue");
+            ListByDay(week_id, "wed");
+            ListByDay(week_id, "thu");
+            ListByDay(week_id, "fri");
+            ListByDay(week_id, "sat");
+            ListByDay(week_id, "sun");
         }
 
         public IActionResult OnGet()
@@ -185,13 +220,20 @@ namespace Automatic_Scheduling_App.Pages
 
             if (display_week == 0)
             {
-                // check if week exists
-                week_list = new List<Tuple<string, TimeSpan, TimeSpan, string, string>>();
+                mon_list = [];
+                tue_list = [];
+                wed_list = [];
+                thu_list = [];
+                fri_list = [];
+                sat_list = [];
+                sun_list = [];
+
+                message = "No Schedule Found!";
             }
             else
             {
-                // display monday
-                ListByDay(display_week, "mon");
+                // display each day
+                DisplayWeek(display_week);
             }
 
             try // verify user
@@ -203,6 +245,8 @@ namespace Automatic_Scheduling_App.Pages
                 user_id = 0;
             }
 
+            UpdateNotify();
+
             // try sent user back to index if he tries coming back here without login
             if (user_id == 0)
                 return RedirectToPage("Index");
@@ -211,17 +255,26 @@ namespace Automatic_Scheduling_App.Pages
         }
         public void OnPost()
         {
+            try // verify user
+            {
+                user_id = (int)HttpContext.Session.GetInt32("user_id");
+            }
+            catch (Exception ex)
+            {
+                user_id = 0;
+            }
+
+            UpdateNotify();
 
             try
             {
                 index = (int)HttpContext.Session.GetInt32("index");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 index = 2;
             }
-            week_day = "mon";
-            
+
 
             if (Request.Form.ContainsKey("prevbut"))
             {
@@ -251,19 +304,15 @@ namespace Automatic_Scheduling_App.Pages
                 AssignmentCreator newAssignment = new AssignmentCreator(db_config);
                 // make the assignment for corresponding week
                 if (index == 1)
-                    newAssignment.AutoScheduler(week_name, mon_w1);
+                    newAssignment.AutoScheduler(weeks[0], mon_w1);
                 else if (index == 2)
-                    newAssignment.AutoScheduler(week_name, mon_w2);
+                    newAssignment.AutoScheduler(weeks[1], mon_w2);
                 else if (index == 3)
-                    newAssignment.AutoScheduler(week_name, mon_w3);
+                    newAssignment.AutoScheduler(weeks[2], mon_w3);
                 else if (index == 4)
-                    newAssignment.AutoScheduler(week_name, mon_w4);
+                    newAssignment.AutoScheduler(weeks[3], mon_w4);
 
                 message = "###  New schedules have been generated  ###";
-            }
-            else if (Request.Form.ContainsKey("reset_day"))
-            {
-                week_day = Request.Form["week_day"];
             }
 
             week_name = weeks[index - 1];
@@ -281,12 +330,20 @@ namespace Automatic_Scheduling_App.Pages
 
             if (display_week == 0)
             {
-                week_list = new List<Tuple<string, TimeSpan, TimeSpan, string, string>>();
+                mon_list = [];
+                tue_list = [];
+                wed_list = [];
+                thu_list = [];
+                fri_list = []; 
+                sat_list = [];
+                sun_list = [];
+
+                message = "No Schedule Found!";
             }
             else
             {
                 // display each day
-                ListByDay(display_week, week_day);
+                DisplayWeek(display_week);
             }
 
             // set navigation flags

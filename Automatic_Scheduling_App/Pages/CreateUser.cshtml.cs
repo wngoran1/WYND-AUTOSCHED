@@ -21,6 +21,7 @@ namespace Automatic_Scheduling_App.Pages
         public string userValid { get; set; }
         public string message { get; set; }
         public string signin { get; set; }
+        public int notify { get; set; }
         public Dictionary<string, int> departments { get; set; }
         public Dictionary<string, string> register { get; set; }
 
@@ -44,6 +45,28 @@ namespace Automatic_Scheduling_App.Pages
             loadRegistration();
         }
 
+        private void UpdateNotify()
+        {
+            try
+            {
+                database.Open();
+                string query = "select count(*) from time_off_request " +
+                                "where user_id = @UserID and apprv > 0 and dayoff > CURDATE()";
+                MySqlCommand select = new MySqlCommand(query, database);
+                select.Parameters.AddWithValue("@UserID", user_id);
+                object result = select.ExecuteScalar();
+
+                if (result != null)
+                    notify = Convert.ToInt32(result);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                // Handle exceptions
+            }
+            finally { database.Close(); }
+        }
         private void loadDepartments()
         {
             departments = new Dictionary<string, int>();
@@ -200,6 +223,8 @@ namespace Automatic_Scheduling_App.Pages
                 user_id = 0;
             }
 
+            UpdateNotify();
+
             // try sent user back to index if he tries coming back here without login
             if (user_id == 0)
                 return RedirectToPage("Index");
@@ -209,6 +234,17 @@ namespace Automatic_Scheduling_App.Pages
 
         public void OnPost()
         {
+            try // verify user
+            {
+                user_id = (int)HttpContext.Session.GetInt32("user_id");
+            }
+            catch (Exception ex)
+            {
+                user_id = 0;
+            }
+
+            UpdateNotify();
+
             int dept_id = int.Parse(Request.Form["dept_id"]);
             string position = Request.Form["position"];
             string email = Request.Form["email"];
